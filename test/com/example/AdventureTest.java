@@ -131,11 +131,6 @@ public class AdventureTest {
     public void loadSiebelJson() throws Exception {
         Gson gson = new Gson();
         layout = gson.fromJson(SIEBEL_JSON, Layout.class);
-
-        System.out.println(layout.getStartingRoom());
-        System.out.println(layout.getEndingRoom());
-        System.out.println(layout.getRooms()[0].getName());
-        System.out.println(layout.getRooms()[0].getDirections()[0].getDirectionName());
     }
 
     @Test
@@ -152,4 +147,17 @@ public class AdventureTest {
     public void getRoomsTest() throws Exception {
         assertEquals(8, layout.getRooms().length);
     }
+
+    @Test
+    public void getRoomTest() throws Exception {
+        assertEquals("MatthewsStreet", layout.getRoom("MatthewsStreet").getName());
+    }
+
+//    @Test
+//    public void getNullRoomTest() throws Exception {
+//        IllegalArgumentException illegalArgumentException = new IllegalArgumentException();
+//        NullPointerException nullPointerException = new NullPointerException();
+//        assertEquals(nullPointerException, layout.getRoom(null));
+//        assertEquals(illegalArgumentException, layout.getRoom("sdmvlkasd"));
+//    }
 }
