@@ -153,11 +153,31 @@ public class AdventureTest {
         assertEquals("MatthewsStreet", layout.getRoom("MatthewsStreet").getName());
     }
 
+    @Test
+    public void getRoomDirectionsTest() throws Exception {
+        assertEquals(3, layout.getRoom("SiebelEastHallway").getDirections().length);
+    }
+
+    @Test
+    public void getCurrentRoomTest() throws Exception {
+        assertEquals("MatthewsStreet", layout.getCurrentRoom().getName());
+    }
+
+    @Test
+    public void changeRoomsTest() throws Exception {
+        assertEquals(true, layout.changeRooms("East"));
+    }
+
 //    @Test
-//    public void getNullRoomTest() throws Exception {
+//    public void getNonexistentRoomTest() throws Exception {
 //        IllegalArgumentException illegalArgumentException = new IllegalArgumentException();
-//        NullPointerException nullPointerException = new NullPointerException();
-//        assertEquals(nullPointerException, layout.getRoom(null));
 //        assertEquals(illegalArgumentException, layout.getRoom("sdmvlkasd"));
 //    }
+//
+//    @Test
+//    public void getNullRoomTest() throws Exception {
+//        NullPointerException nullPointerException = new NullPointerException();
+//        assertEquals(nullPointerException, layout.getRoom(null));
+//    }
+
 }

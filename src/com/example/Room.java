@@ -7,6 +7,7 @@ public class Room {
     private String description;
     private Direction[] directions;
     private HashMap<String, String> directionToRoomMap;
+    private boolean hashMapLoaded = false;
 
     public Room(String setName, String setDescription, Direction[] setDirections) {
         this.name = setName;
@@ -17,6 +18,7 @@ public class Room {
         for (Direction direction : directions) {
             directionToRoomMap.put(direction.getDirectionName(), direction.getRoom());
         }
+        this.hashMapLoaded = true;
     }
 
     public String getName() {
@@ -35,9 +37,21 @@ public class Room {
         if (direction == null) {
             throw new NullPointerException();
         }
+        if (!hashMapLoaded) {
+            this.loadHashMap();
+        }
         if (!directionToRoomMap.containsKey(direction)) {
             throw new IllegalArgumentException();
         }
         return directionToRoomMap.get(direction);
+    }
+
+    private void loadHashMap() {
+        this.directionToRoomMap = new HashMap<String, String>();
+
+        for (Direction direction : directions) {
+            directionToRoomMap.put(direction.getDirectionName(), direction.getRoom());
+        }
+        this.hashMapLoaded = true;
     }
 }
