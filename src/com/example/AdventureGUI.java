@@ -136,12 +136,14 @@ public class AdventureGUI {
             System.out.println("From here, you may go" + formatDirections(currentRoom));
             Scanner sc = new Scanner(System.in);
             boolean userInputIsValid = false;
+            boolean shouldQuit = false;
 
             while (!userInputIsValid) {
                 String userDirections = sc.nextLine();
                 String[] decipheredInput = decipherUserInput(userDirections);
 
                 if (decipheredInput == null) {
+                    shouldQuit = true;
                     break;
                 } else if (decipheredInput[0].equals("go")) {
                     try {
@@ -154,6 +156,17 @@ public class AdventureGUI {
                     System.out.println("I don't understand '" + userDirections + "'");
                 }
             }
+
+            if (shouldQuit == true) {
+                break;
+            }
+            if (currentRoom.getName().equals(layout.getEndingRoom())) {
+                reachedEndingRoom = true;
+            }
+        }
+
+        if (reachedEndingRoom) {
+            System.out.println("You have reached your final destination");
         }
     }
 
