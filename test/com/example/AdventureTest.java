@@ -165,19 +165,17 @@ public class AdventureTest {
 
     @Test
     public void changeRoomsTest() throws Exception {
-        assertEquals(true, layout.changeRooms("East"));
+        assertEquals("SiebelEntry", layout.changeRooms("East").getName());
     }
 
-//    @Test
-//    public void getNonexistentRoomTest() throws Exception {
-//        IllegalArgumentException illegalArgumentException = new IllegalArgumentException();
-//        assertEquals(illegalArgumentException, layout.getRoom("sdmvlkasd"));
-//    }
-//
-//    @Test
-//    public void getNullRoomTest() throws Exception {
-//        NullPointerException nullPointerException = new NullPointerException();
-//        assertEquals(nullPointerException, layout.getRoom(null));
-//    }
+    @Test(expected = IllegalArgumentException.class)
+    public void getNonexistentRoomTest() throws Exception {
+        layout.getRoom("sdmvlkasd");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getNullRoomTest() throws Exception {
+        layout.getRoom(null);
+    }
 
 }
