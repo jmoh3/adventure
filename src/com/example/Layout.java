@@ -107,13 +107,15 @@ public class Layout {
      * @param direction direction in which the user wants to move
      * @return current room object.
      * @throws IllegalArgumentException thrown if user tries to move in an invalid direction.
+     * @throws NullPointerException thrown if method is given null direction.
      */
-    public Room changeRooms(String direction) throws IllegalArgumentException {
+    public Room changeRooms(String direction) throws IllegalArgumentException, NullPointerException {
         Room current = this.getCurrentRoom();
         if (!this.hashMapLoaded) {
             this.loadHashmap();
         }
-        String nextRoomName = current.getRoomForDirection(direction);
+        String preprocessedDirection = direction.substring(0, 1).toUpperCase() + direction.substring(1).toLowerCase();
+        String nextRoomName = current.getRoomForDirection(preprocessedDirection);
         this.currentRoom = this.getRoom(nextRoomName);
         return this.currentRoom;
     }

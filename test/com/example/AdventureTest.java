@@ -169,6 +169,16 @@ public class AdventureTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void invalidChangeRoomsTest() throws Exception {
+        layout.changeRooms("South").getName();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullChangeRoomsTest() throws Exception {
+        layout.changeRooms(null).getName();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void getNonexistentRoomTest() throws Exception {
         layout.getRoom("sdmvlkasd");
     }
@@ -177,5 +187,4 @@ public class AdventureTest {
     public void getNullRoomTest() throws Exception {
         layout.getRoom(null);
     }
-
 }
