@@ -170,6 +170,12 @@ public class AdventureGUI {
         }
     }
 
+    /**
+     * Formats the valid directions for a room so that output for GUI is clean.
+     *
+     * @param room current room.
+     * @return a String listing available directions with appropriate punctuation and grammar.
+     */
     private static String formatDirections(Room room) {
         String output = " ";
         for (int i = 0; i < room.getDirections().length; i++) {
@@ -184,6 +190,12 @@ public class AdventureGUI {
         return output;
     }
 
+    /**
+     * Takes user input and decides what to do with it.
+     *
+     * @param input what the user prompts the game to do.
+     * @return null if the user directs game to quit, otherwise a lowercase array of all words separated by spaces.
+     */
     private static String[] decipherUserInput(String input) {
         String userInput = input.toLowerCase();
 
