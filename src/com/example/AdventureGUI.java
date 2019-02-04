@@ -130,15 +130,15 @@ public class AdventureGUI {
 
         Room currentRoom = layout.getCurrentRoom();
         boolean reachedEndingRoom = false;
+        Scanner sc = new Scanner(System.in);
 
         while (!reachedEndingRoom) {
-            System.out.println(currentRoom.getDescription());
-            System.out.println("From here, you may go" + formatDirections(currentRoom));
-            Scanner sc = new Scanner(System.in);
             boolean userInputIsValid = false;
             boolean shouldQuit = false;
 
             while (!userInputIsValid) {
+                System.out.println(currentRoom.getDescription());
+                System.out.println("From here, you may go" + formatDirections(currentRoom));
                 String userDirections = sc.nextLine();
                 String[] decipheredInput = decipherUserInput(userDirections);
 
@@ -177,15 +177,15 @@ public class AdventureGUI {
      * @return a String listing available directions with appropriate punctuation and grammar.
      */
     private static String formatDirections(Room room) {
-        String output = " ";
+        String output = "";
         for (int i = 0; i < room.getDirections().length; i++) {
             if (i > 0 && room.getDirections().length > 2) {
-                output = output + ", ";
+                output = output + ",";
             }
             if (i == room.getDirections().length - 1 && room.getDirections().length > 1) {
-                output = output + "and ";
+                output = output + " and";
             }
-            output = output + room.getDirections()[i].getDirectionName();
+            output = output + " " + room.getDirections()[i].getDirectionName();
         }
         return output;
     }
