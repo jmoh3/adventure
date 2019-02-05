@@ -83,7 +83,7 @@ public class Room {
         if (!directionToRoomMap.containsKey(direction.toLowerCase())) {
             throw new IllegalArgumentException();
         }
-        return directionToRoomMap.get(direction);
+        return directionToRoomMap.get(direction.toLowerCase());
     }
 
     /**

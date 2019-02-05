@@ -3,9 +3,11 @@ package com.example;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -53,8 +55,10 @@ public class Layout {
      *
      * @param url url from which to access the json.
      * @return Layout object.
+     * @throws MalformedURLException
+     * @throws IOException
      */
-    public static Layout getLayoutFromURL(String url) {
+    public static Layout getLayoutFromURL(String url) throws MalformedURLException, IOException {
         String jsonString = Layout.readURL(url);
 
         Gson gson = new Gson();
@@ -161,8 +165,10 @@ public class Layout {
      *
      * @param urlStr url String of a Layout json.
      * @return text contained by URL
+     * @throws MalformedURLException thrown when user provides bad URL
+     * @throws IOException thrown when there is an error reading in URL
      */
-    private static String readURL(String urlStr) {
+    private static String readURL(String urlStr) throws MalformedURLException, IOException {
         String output = "";
         try {
             URL url = new URL(urlStr);
@@ -174,8 +180,10 @@ public class Layout {
         } catch (Exception e) {
             if (e.getClass() == MalformedURLException.class) {
                 System.out.println("Bad URL has been provided.");
+                throw new MalformedURLException();
             }
             System.out.println("An error has occurred while reading from the URL.");
+            throw new IOException();
         }
 
         return output;
@@ -200,6 +208,44 @@ public class Layout {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Validates that current layout object has a path from startingRoom to endingRoom.
+     *
+     * @return true if such a path exists, false otherwise.
+     */
+    public boolean validateLayout() {
+        Room startRoom = this.getRoom(this.getStartingRoom());
+        boolean reachedEnd = false;
+        ArrayList<Room> seen = new ArrayList<Room>();
+
+        return reachedEnd(startRoom, seen);
+    }
+
+    /**
+     * Private recursive helper function to determine whether a path has reached an end.
+     *
+     * @param current current Room.
+     * @param seen Rooms that we have already seen.
+     * @return true if the ending room has been reached.
+     */
+    private boolean reachedEnd(Room current, ArrayList<Room> seen) {
+        if (current.getName().equals(this.getEndingRoom())) {
+            return true;
+        }
+        seen.add(current);
+        boolean ended = false;
+        for (Direction direction : current.getDirections()) {
+            Room nextRoom = this.getRoom(current.getRoomForDirection(direction.getDirectionName()));
+            if (seen.contains(nextRoom)) {
+                continue;
+            }
+            if (reachedEnd(nextRoom, seen)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

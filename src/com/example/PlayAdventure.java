@@ -10,19 +10,24 @@ public class PlayAdventure {
 
     // URL to default Layout JSON to use
     private static String defaultSiebelUrl = "https://courses.engr.illinois.edu/cs126/adventure/siebel.json";
+    private static Layout layout;
 
     public static void main(String[] args) {
 
-        Layout layout = Layout.getLayoutFromURL(defaultSiebelUrl);
+        try {
+            layout = Layout.getLayoutFromURL(defaultSiebelUrl);
+        } catch (Exception e) {
+            System.out.println("Error reading in default JSON. Honestly if this happens you should just give up.");
+        }
 
         System.out.println("Type yes if you want to use the default layout. Otherwise, enter in a valid url to a layout JSON");
         Scanner sc = new Scanner(System.in);
         String layoutDecision = sc.nextLine();
 
-        if (!layoutDecision.toLowerCase().equals("yes")) {
+        if (layoutDecision == null || !layoutDecision.toLowerCase().equals("yes")) {
             boolean validLayoutObtained = false;
 
-            while (!validLayoutObtained) {
+            while (!validLayoutObtained && !(layoutDecision.toLowerCase().equals("yes"))) {
                 try {
                     layout = Layout.getLayoutFromURL(layoutDecision);
                     validLayoutObtained = true;
@@ -43,6 +48,7 @@ public class PlayAdventure {
             while (!userInputIsValid) {
                 System.out.println(currentRoom.getDescription());
                 System.out.println("From here, you may go" + formatDirections(currentRoom));
+
                 String userDirections = sc.nextLine();
                 String[] decipheredInput = decipherUserInput(userDirections);
 

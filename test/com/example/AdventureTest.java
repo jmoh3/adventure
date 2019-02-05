@@ -192,4 +192,9 @@ public class AdventureTest {
     public void getNullRoomTest() throws Exception {
         layout.getRoom(null);
     }
+
+    @Test
+    public void validateLayout() throws Exception {
+        assertEquals(true, layout.validateLayout());
+    }
 }
