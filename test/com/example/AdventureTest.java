@@ -134,6 +134,11 @@ public class AdventureTest {
     }
 
     @Test
+    public void getLayoutFromURLTest() throws Exception {
+        assertEquals(layout, Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/siebel.json"));
+    }
+
+    @Test
     public void getStartingRoomTest() throws Exception {
         assertEquals("MatthewsStreet", layout.getStartingRoom());
     }

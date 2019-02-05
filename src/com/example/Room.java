@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -95,5 +96,26 @@ public class Room {
             directionToRoomMap.put(direction.getDirectionName(), direction.getRoom());
         }
         this.hashMapLoaded = true;
+    }
+
+    /**
+     * Overrides default equals (for testing purposes).
+     *
+     * @param other object which we are comparing.
+     * @return true if Rooms contain same information, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != Room.class) {
+            return false;
+        }
+        Room otherRoom = (Room) other;
+        if (this.name.equals((otherRoom.getName()))
+                && Arrays.deepEquals(this.directions, otherRoom.getDirections())
+                && this.description.equals(otherRoom.getDescription())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

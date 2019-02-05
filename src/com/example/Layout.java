@@ -1,6 +1,13 @@
 package com.example;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+
 
 /**
  * A class that describes a layout of Rooms.
@@ -38,6 +45,21 @@ public class Layout {
             this.stringRoomHashMap.put(room.getName(), room);
         }
         this.hashMapLoaded = true;
+    }
+
+    /**
+     * Instantiates and returns a Layout object from a url to Layout JSON.
+     *
+     * @param url url from which to access the json.
+     * @return Layout object.
+     */
+    public static Layout getLayoutFromURL(String url) {
+        String jsonString = Layout.readURL(url);
+
+        Gson gson = new Gson();
+        Layout layout = gson.fromJson(jsonString, Layout.class);
+
+        return layout;
     }
 
     /**
@@ -130,4 +152,52 @@ public class Layout {
             this.stringRoomHashMap.put(room.getName(), room);
         }
     }
+
+    /**
+     * Private helper method that reads in a string from URL
+     * Used to create Layout object.
+     *
+     * Code from: https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html
+     *
+     * @param urlStr url String of a Layout json.
+     * @return text contained by URL
+     */
+    private static String readURL(String urlStr) {
+        String output = "";
+        try {
+            URL url = new URL(urlStr);
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null)
+                output = output + inputLine;
+//                System.out.println(inputLine);
+            in.close();
+        } catch (Exception e) {
+            System.out.println("an error has occurred");
+        }
+
+        return output;
+    }
+
+    /**
+     * Overrides default equals (for testing purposes).
+     *
+     * @param other object which we are comparing.
+     * @return true if Layouts contain same information, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != Layout.class) {
+            return false;
+        }
+        Layout otherLayout =  (Layout) other;
+        if (this.startingRoom.equals((otherLayout.getStartingRoom()))
+                && this.endingRoom.equals(otherLayout.getEndingRoom())
+                && Arrays.deepEquals(this.rooms, otherLayout.getRooms())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

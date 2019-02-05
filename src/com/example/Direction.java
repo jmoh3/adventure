@@ -37,4 +37,24 @@ public class Direction {
     public String getRoom() {
         return this.room;
     }
+
+    /**
+     * Overrides default equals (for testing purposes).
+     *
+     * @param other object which we are comparing.
+     * @return true if Directions contain same information, false otherwise.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != Direction.class) {
+            return false;
+        }
+        Direction otherDirection = (Direction) other;
+        if (this.directionName.equals(((Direction) other).getDirectionName())
+                && this.room.equals(otherDirection.getRoom())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
