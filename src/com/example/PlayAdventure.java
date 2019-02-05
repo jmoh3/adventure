@@ -2,6 +2,10 @@ package com.example;
 
 import java.util.Scanner;
 
+/**
+ * Allows user to play Adventure.
+ *
+ */
 public class PlayAdventure {
 
     // URL to default Layout JSON to use
@@ -23,7 +27,7 @@ public class PlayAdventure {
                     layout = Layout.getLayoutFromURL(layoutDecision);
                     validLayoutObtained = true;
                 } catch (Exception e) {
-                    System.out.println("You have entered an invalid url or direction. Please try again.");
+                    System.out.println("You have entered an invalid url or command. Please try again.");
                     layoutDecision = sc.nextLine();
                 }
             }
@@ -66,6 +70,7 @@ public class PlayAdventure {
         }
 
         if (reachedEndingRoom) {
+            System.out.println(currentRoom.getDescription());
             System.out.println("You have reached your final destination");
         }
     }

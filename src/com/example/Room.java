@@ -80,7 +80,7 @@ public class Room {
         if (!hashMapLoaded) {
             this.loadHashMap();
         }
-        if (!directionToRoomMap.containsKey(direction)) {
+        if (!directionToRoomMap.containsKey(direction.toLowerCase())) {
             throw new IllegalArgumentException();
         }
         return directionToRoomMap.get(direction);
@@ -93,7 +93,7 @@ public class Room {
         this.directionToRoomMap = new HashMap<String, String>();
 
         for (Direction direction : directions) {
-            directionToRoomMap.put(direction.getDirectionName(), direction.getRoom());
+            directionToRoomMap.put(direction.getDirectionName().toLowerCase(), direction.getRoom());
         }
         this.hashMapLoaded = true;
     }

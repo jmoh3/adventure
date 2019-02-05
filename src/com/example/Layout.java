@@ -137,8 +137,7 @@ public class Layout {
         if (!this.hashMapLoaded) {
             this.loadHashmap();
         }
-        String preprocessedDirection = direction.substring(0, 1).toUpperCase() + direction.substring(1).toLowerCase();
-        String nextRoomName = current.getRoomForDirection(preprocessedDirection);
+        String nextRoomName = current.getRoomForDirection(direction);
         this.currentRoom = this.getRoom(nextRoomName);
         return this.currentRoom;
     }
