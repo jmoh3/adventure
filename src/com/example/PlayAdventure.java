@@ -2,15 +2,35 @@ package com.example;
 
 import java.util.Scanner;
 
-public class AdventureGUI {
+public class PlayAdventure {
+
+    // URL to default Layout JSON to use
+    private static String defaultSiebelUrl = "https://courses.engr.illinois.edu/cs126/adventure/siebel.json";
 
     public static void main(String[] args) {
 
-        Layout layout = Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/siebel.json");
+        Layout layout = Layout.getLayoutFromURL(defaultSiebelUrl);
+
+        System.out.println("Type yes if you want to use the default layout. Otherwise, enter in a valid url to a layout JSON");
+        Scanner sc = new Scanner(System.in);
+        String layoutDecision = sc.nextLine();
+
+        if (!layoutDecision.toLowerCase().equals("yes")) {
+            boolean validLayoutObtained = false;
+
+            while (!validLayoutObtained) {
+                try {
+                    layout = Layout.getLayoutFromURL(layoutDecision);
+                    validLayoutObtained = true;
+                } catch (Exception e) {
+                    System.out.println("You have entered an invalid url or direction. Please try again.");
+                    layoutDecision = sc.nextLine();
+                }
+            }
+        }
 
         Room currentRoom = layout.getCurrentRoom();
         boolean reachedEndingRoom = false;
-        Scanner sc = new Scanner(System.in);
 
         while (!reachedEndingRoom) {
             boolean userInputIsValid = false;

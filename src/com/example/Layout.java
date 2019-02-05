@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -170,10 +171,12 @@ public class Layout {
             String inputLine;
             while ((inputLine = in.readLine()) != null)
                 output = output + inputLine;
-//                System.out.println(inputLine);
             in.close();
         } catch (Exception e) {
-            System.out.println("an error has occurred");
+            if (e.getClass() == MalformedURLException.class) {
+                System.out.println("Bad URL has been provided.");
+            }
+            System.out.println("An error has occurred while reading from the URL.");
         }
 
         return output;
