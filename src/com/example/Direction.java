@@ -50,11 +50,8 @@ public class Direction {
             return false;
         }
         Direction otherDirection = (Direction) other;
-        if (this.directionName.equals(((Direction) other).getDirectionName())
-                && this.room.equals(otherDirection.getRoom())) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return (this.directionName.equals(((Direction) other).getDirectionName())
+                && this.room.equals(otherDirection.getRoom()));
     }
 }

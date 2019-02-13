@@ -1,6 +1,6 @@
 # Extending the Adventure Assignment
 
-I was directed by my code moderator to make the following changes:
+I was directed by my code moderator to make the following changes.
 
 ## Smaller changes:
 * Using return (condition) in Direction instead of if else statement
