@@ -50,7 +50,7 @@ public class PlayAdventure {
                 System.out.println("From here, you may go" + formatDirections(currentRoom));
 
                 String userDirections = sc.nextLine();
-                String[] decipheredInput = decipherUserInput(userDirections);
+                String[] decipheredInput = decipherUserDirections(userDirections);
 
                 if (decipheredInput == null) {
                     shouldQuit = true;
@@ -107,7 +107,7 @@ public class PlayAdventure {
      * @param input what the user prompts the game to do.
      * @return null if the user directs game to quit, otherwise a lowercase array of all words separated by spaces.
      */
-    private static String[] decipherUserInput(String input) {
+    private static String[] decipherUserDirections(String input) {
         String userInput = input.toLowerCase();
 
         if (userInput.equals("quit") || userInput.equals("exit")) {
