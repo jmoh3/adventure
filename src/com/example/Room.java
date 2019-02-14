@@ -2,22 +2,26 @@ package com.example;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A class that describes a room.
  */
 public class Room {
 
-    // room name
+    /** room name */
     private String name;
-    // room description.
+    /** room name */
+    private List<String> items;
+    /** room description */
     private String description;
-    // available directions
+    /** available directions */
     private Direction[] directions;
-    // hashmap that has directions as keys and corresponding rooms as values
+    /** hashmap that has directions as keys and corresponding rooms as values */
     private HashMap<String, String> directionToRoomMap;
-    // makes sure the hashmap has been initialized before trying to use it
+    /** makes sure the hashmap has been initialized before trying to use it */
     private boolean hashMapLoaded = false;
+
 
     /**
      * Constructor that accepts a room name, description, and directions.
@@ -26,11 +30,12 @@ public class Room {
      * @param setDescription the description of the room.
      * @param setDirections the directions in which the user can navigate to from the room.
      */
-    public Room(String setName, String setDescription, Direction[] setDirections) {
+    public Room(String setName, String setDescription, Direction[] setDirections, List<String> setItems) {
         this.name = setName;
         this.description = setDescription;
         this.directions = setDirections;
         this.directionToRoomMap = new HashMap<String, String>();
+        this.items = setItems;
 
         for (Direction direction : directions) {
             directionToRoomMap.put(direction.getDirectionName(), direction.getRoom());
@@ -63,6 +68,34 @@ public class Room {
      */
     public Direction[] getDirections() {
         return this.directions;
+    }
+
+    /**
+     * Returns items within room.
+     *
+     * @return List of items in that room.
+     */
+    public List<String> getItems() {
+        return this.items;
+    }
+
+    /**
+     * Removes an item from a room's item list.
+     *
+     * @param itemName name of item to remove.
+     * @return true if remove was successful, false otherwise.
+     */
+    public boolean removeItem(String itemName) {
+        return this.items.remove(itemName);
+    }
+
+    /**
+     * Allows user to drop an item in given room.
+     *
+     * @param itemName item to drop.
+     */
+    public void dropItem(String itemName) {
+        this.items.add(itemName);
     }
 
     /**

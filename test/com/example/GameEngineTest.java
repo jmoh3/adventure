@@ -175,7 +175,20 @@ public class GameEngineTest {
     }
 
     @Test
-    public void validateLayout() throws Exception {
+    public void validateLayoutTrue() throws Exception {
         assertEquals(true, gameEngine.validateLayout());
+    }
+
+    @Test
+    public void validateLayoutFalse() throws Exception {
+        Layout customLayout = Layout.getLayoutFromFilepath("custom.json");
+        GameEngine customGameEngine = new GameEngine(customLayout);
+
+        assertEquals(false, customGameEngine.validateLayout());
+    }
+
+    @Test
+    public void getItemsInRoomTest() throws Exception {
+        assertEquals("coin", gameEngine.getRoom("MatthewsStreet").getItems().get(0));
     }
 }

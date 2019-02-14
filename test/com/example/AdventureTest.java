@@ -129,11 +129,13 @@ public class AdventureTest {
             "}";
 
     private static Layout layout;
+    private static Layout custom;
 
     @Before
     public void loadSiebelJson() throws Exception {
         Gson gson = new Gson();
         layout = gson.fromJson(SIEBEL_JSON, Layout.class);
+        custom = Layout.getLayoutFromFilepath("custom.json");
     }
 
     @Test

@@ -1,0 +1,181 @@
+{
+  "startingRoom": "Entrance",
+  "endingRoom": "HiddenExit",
+  "rooms": [
+    {
+      "name": "Entrance",
+      "description": "You are at the entrance of the manor.",
+      "directions": [
+        {
+          "directionName": "North",
+          "room": "Hall"
+        },
+        {
+          "directionName": "East",
+          "room": "DiningRoom"
+        },
+        {
+          "directionName": "South",
+          "room": "Ballroom"
+        },
+        {
+          "directionName": "West",
+          "room": "BilliardRoom"
+        }
+      ]
+    },
+    {
+      "name": "Hall",
+      "description": "You are currently in the hall.",
+      "items": ["candlestick"],
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Study"
+        },
+        {
+          "directionName": "East",
+          "room": "Lounge"
+        },
+        {
+          "directionName": "South",
+          "room": "Entrance"
+        }
+      ]
+    },
+    {
+      "name": "Lounge",
+      "description": "You are in the Lounge",
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Hall"
+        },
+        {
+          "directionName": "South",
+          "room": "DiningRoom"
+        }
+      ]
+    },
+    {
+      "name": "DiningRoom",
+      "description": "You are in the dining room.",
+      "items": ["leadPipe"],
+      "directions": [
+        {
+          "directionName": "North",
+          "room": "Lounge"
+        },
+        {
+          "directionName": "West",
+          "room": "Entrance"
+        },
+        {
+          "directionName": "South",
+          "room": "Kitchen"
+        }
+      ]
+    },
+    {
+      "name": "Kitchen",
+      "description": "You are in the kitchen.",
+      "items": ["knife"],
+      "directions": [
+        {
+          "directionName": "North",
+          "room": "DiningRoom"
+        },
+        {
+          "directionName": "West",
+          "room": "Ballroom"
+        }
+      ]
+    },
+    {
+      "name": "Ballroom",
+      "description": "You are in the Ballroom.",
+      "items": ["rope"],
+      "directions": [
+        {
+          "directionName": "West",
+          "room": "Conservatory"
+        },
+        {
+          "directionName": "North",
+          "room": "Entrance"
+        },
+        {
+          "directionName": "East",
+          "room": "Kitchen"
+        }
+      ]
+    },
+    {
+      "name": "Conservatory",
+      "description": "You are in the Conservatory.",
+      "directions": [
+        {
+          "directionName": "East",
+          "room": "Ballroom"
+        },
+        {
+          "directionName": "North",
+          "room": "BilliardRoom"
+        }
+      ]
+    },
+    {
+      "name": "BilliardRoom",
+      "description": "You are in the Billiard Room.",
+      "items": ["wrench"],
+      "directions": [
+        {
+          "directionName": "North",
+          "room": "Library"
+        },
+        {
+          "directionName": "East",
+          "room": "Entrance"
+        },
+        {
+          "directionName": "South",
+          "room": "Conservatory"
+        }
+      ]
+    },
+    {
+      "name": "Library",
+      "description": "You are in the Library.",
+      "directions": [
+        {
+          "directionName": "North",
+          "room": "Study"
+        },
+        {
+          "directionName": "South",
+          "room": "BilliardRoom"
+        }
+      ]
+    },
+    {
+      "name": "Study",
+      "description": "You are in the study.",
+      "items": ["revolver"],
+      "directions": [
+        {
+          "directionName": "South",
+          "room": "Library"
+        },
+        {
+          "directionName": "East",
+          "room": "Hall"
+        }
+      ]
+    },
+    {
+      "name": "HiddenExit",
+      "description": "Congratulations! You've won the game.",
+      "items": ["trophy"]
+    }
+  ]
+}
