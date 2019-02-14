@@ -40,7 +40,7 @@ public class GameEngine {
     public Room changeRooms(String direction) throws IllegalArgumentException, NullPointerException {
         Room current = this.currentRoom;
 
-        String nextRoomName = current.getRoomForDirection(direction);
+        String nextRoomName = current.getRoomFromDirection(direction);
         this.currentRoom = getRoom(nextRoomName);
         return this.currentRoom;
     }
@@ -104,7 +104,7 @@ public class GameEngine {
         seen.add(current);
         boolean ended = false;
         for (Direction direction : current.getDirections()) {
-            Room nextRoom = this.getRoom(current.getRoomForDirection(direction.getDirectionName()));
+            Room nextRoom = this.getRoom(current.getRoomFromDirection(direction.getDirectionName()));
             if (seen.contains(nextRoom)) {
                 continue;
             }

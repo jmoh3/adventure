@@ -73,7 +73,7 @@ public class Room {
      * @throws NullPointerException thrown if the method is given a null direction.
      * @throws IllegalArgumentException thrown if the method is given an invalid direction.
      */
-    public String getRoomForDirection(String direction) throws NullPointerException, IllegalArgumentException {
+    public String getRoomFromDirection(String direction) throws NullPointerException, IllegalArgumentException {
         if (direction == null) {
             throw new NullPointerException();
         }
