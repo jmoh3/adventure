@@ -55,6 +55,15 @@ public class Layout {
         return layout;
     }
 
+    public static Layout getLayoutFromFilepath(String filepath) {
+        String jsonString = Data.getFileContentsAsString(filepath);
+
+        Gson gson = new Gson();
+        Layout layout = gson.fromJson(jsonString, Layout.class);
+
+        return layout;
+    }
+
     /**
      * Returns start room.
      *

@@ -141,6 +141,11 @@ public class AdventureTest {
         assertEquals(layout, Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/siebel.json"));
     }
 
+    @Test
+    public void getLayoutFromFilepathTest() throws Exception {
+        assertEquals(layout, Layout.getLayoutFromFilepath("siebel.json"));
+    }
+
     @Test(expected = IOException.class)
     public void getLayoutFromBadURLTest() throws Exception {
         Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/sdf.json");

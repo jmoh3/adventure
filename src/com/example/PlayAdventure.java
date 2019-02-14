@@ -1,5 +1,8 @@
 package com.example;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import java.util.Scanner;
 
 /**
@@ -8,38 +11,36 @@ import java.util.Scanner;
  */
 public class PlayAdventure {
 
-    // URL to default Layout JSON to use
-    private static String defaultSiebelUrl = "https://courses.engr.illinois.edu/cs126/adventure/siebel.json";
     private static Layout layout;
     private static GameEngine gameEngine;
 
     /**
-     * Sets up Layout and GameEngine objects from JSON.
+     * Sets up Layout and GameEngine objects from url to Layout JSON.
+     *
+     * @param url url to a layout JSON.
+     * @throws MalformedURLException thrown if given a bad URL.
+     * @throws IOException thrown if getLayoutFromURL cannot read URL.
      */
-    public void setupGame() {
-        try {
-            layout = Layout.getLayoutFromURL(defaultSiebelUrl);
-        } catch (Exception e) {
-            System.out.println("Error reading in default JSON. Honestly if this happens you should just give up.");
+    public void setupGameUsingUrl(String url) throws MalformedURLException, IOException {
+        layout = Layout.getLayoutFromURL(url);
+
+        gameEngine = new GameEngine(layout);
+
+        if (gameEngine.validateLayout()) {
+            System.out.println("VALID PATH FROM START TO END EXISTS");
+        } else {
+            System.out.println("VALID PATH FROM START TO END DOES NOT EXIST");
         }
+    }
 
-        System.out.println("Type yes if you want to use the default layout. Otherwise, enter in a valid url to a layout JSON");
-        Scanner sc = new Scanner(System.in);
-        String layoutDecision = sc.nextLine();
-
-        if (layoutDecision == null || !layoutDecision.toLowerCase().equals("yes")) {
-            boolean validLayoutObtained = false;
-
-            while (!validLayoutObtained && !(layoutDecision.toLowerCase().equals("yes"))) {
-                try {
-                    layout = Layout.getLayoutFromURL(layoutDecision);
-                    validLayoutObtained = true;
-                } catch (Exception e) {
-                    System.out.println("You have entered an invalid url or command. Please try again.");
-                    layoutDecision = sc.nextLine();
-                }
-            }
-        }
+    /**
+     * Sets up Layout and GameEngine objects from url to Layout JSON.
+     *
+     * @param filepath filepath to a layout JSON.
+     */
+    public void setupGameUsingFilepath(String filepath) {
+        String jsonString = Data.getFileContentsAsString(filepath);
+        layout = Layout.getLayoutFromFilepath(filepath);
 
         gameEngine = new GameEngine(layout);
 
