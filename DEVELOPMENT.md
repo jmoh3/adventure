@@ -11,8 +11,7 @@ I was directed by my code moderator to make the following changes.
 * Magic number in formatDirections
 
 ## Changes that require more restructuring:
-* Adding another class to keep track of game state and input handling
-* Consider a Player class to keep track of location
+* Adding another class to keep track of game state and input handling. I will create a GameEngine class in order to accomplish this and separate my main function from the PlayAdventure class so that my methods are better organized.
 * Decreasing size of main function
 
 I will begin this assignment with these changes - stay tuned for more updates :sunglasses:

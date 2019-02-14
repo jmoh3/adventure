@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import static org.junit.Assert.assertEquals;
 
 public class AdventureTest {
@@ -136,6 +139,16 @@ public class AdventureTest {
     @Test
     public void getLayoutFromURLTest() throws Exception {
         assertEquals(layout, Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/siebel.json"));
+    }
+
+    @Test(expected = IOException.class)
+    public void getLayoutFromBadURLTest() throws Exception {
+        Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/sdf.json");
+    }
+
+    @Test(expected = MalformedURLException.class)
+    public void getLayoutFromMalformedURLTest() throws Exception {
+        Layout.getLayoutFromURL("sdkasvdkn");
     }
 
     @Test
