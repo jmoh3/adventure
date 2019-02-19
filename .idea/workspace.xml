@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59aaca69-6d6d-490c-a764-5c000e823c08" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Data/custom.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/Clue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/com/example/ClueTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DEVELOPMENT.md" beforeDir="false" afterPath="$PROJECT_DIR$/DEVELOPMENT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/example/AdventureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/example/AdventureTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/example/GameEngineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/example/GameEngineTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/Clue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/Clue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/Player.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,21 +43,21 @@
     <session id="1613207822">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.4" value="3" />
-          <entry key="project.open.time.5" value="3" />
+          <entry key="project.open.time.5" value="6" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="3" />
+          <entry key="class" value="4" />
           <entry key="gitignore" value="1" />
-          <entry key="java" value="20" />
+          <entry key="java" value="26" />
           <entry key="json" value="3" />
           <entry key="md" value="3" />
           <entry key="txt" value="1" />
@@ -69,8 +66,8 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="20" />
+          <entry key="CLASS" value="4" />
+          <entry key="JAVA" value="26" />
           <entry key="JSON" value="3" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="4" />
@@ -81,19 +78,19 @@
         <counts>
           <entry key="class" value="9" />
           <entry key="dummy" value="4" />
-          <entry key="java" value="17752" />
+          <entry key="java" value="22073" />
           <entry key="json" value="975" />
-          <entry key="md" value="1701" />
-          <entry key="txt" value="1793" />
+          <entry key="md" value="1716" />
+          <entry key="txt" value="1943" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="9" />
-          <entry key="JAVA" value="17752" />
+          <entry key="JAVA" value="22073" />
           <entry key="JSON" value="975" />
-          <entry key="Markdown" value="1693" />
-          <entry key="PLAIN_TEXT" value="1805" />
+          <entry key="Markdown" value="1708" />
+          <entry key="PLAIN_TEXT" value="1955" />
         </counts>
       </usages-collector>
     </session>
@@ -103,28 +100,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Room.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="97" column="33" lean-forward="true" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+            <state relative-caret-position="-731">
+              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1934#1935#0" expanded="true" />
-                <element signature="e#1955#1956#0" expanded="true" />
                 <element signature="e#2329#2330#0" expanded="true" />
                 <element signature="e#2379#2380#0" expanded="true" />
-                <element signature="e#2529#2530#0" expanded="true" />
-                <element signature="e#2555#2556#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/PlayAdventure.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1200">
-              <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,15 +114,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+            <state relative-caret-position="246">
+              <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
               <folding>
-                <element signature="e#607#608#0" expanded="true" />
-                <element signature="e#646#647#0" expanded="true" />
-                <element signature="e#621#622#0" expanded="true" />
-                <element signature="e#670#671#0" expanded="true" />
-                <element signature="e#905#906#0" expanded="true" />
-                <element signature="e#951#952#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#844#845#0" expanded="true" />
+                <element signature="e#863#864#0" expanded="true" />
+                <element signature="e#954#955#0" expanded="true" />
+                <element signature="e#987#988#0" expanded="true" />
+                <element signature="e#1044#1045#0" expanded="true" />
+                <element signature="e#1063#1064#0" expanded="true" />
+                <element signature="e#1136#1137#0" expanded="true" />
+                <element signature="e#1162#1163#0" expanded="true" />
+                <element signature="e#1228#1229#0" expanded="true" />
+                <element signature="e#1270#1271#0" expanded="true" />
+                <element signature="e#1307#1308#0" expanded="true" />
+                <element signature="e#1352#1353#0" expanded="true" />
+                <element signature="e#1416#1417#0" expanded="true" />
+                <element signature="e#1476#1477#0" expanded="true" />
+                <element signature="e#1527#1528#0" expanded="true" />
+                <element signature="e#1583#1584#0" expanded="true" />
+                <element signature="e#1630#1631#0" expanded="true" />
+                <element signature="e#1682#1683#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/example/Clue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#785#791#0" expanded="true" />
+                <element signature="e#2022#2023#0" expanded="true" />
+                <element signature="e#2059#2060#0" expanded="true" />
+                <element signature="e#2103#2104#0" expanded="true" />
+                <element signature="e#2142#2143#0" expanded="true" />
+                <element signature="e#2796#2797#0" expanded="true" />
+                <element signature="e#2830#2831#0" expanded="true" />
+                <element signature="e#2857#2858#0" expanded="true" />
+                <element signature="e#2893#2894#0" expanded="true" />
+                <element signature="e#2930#2931#0" expanded="true" />
+                <element signature="e#2963#2964#0" expanded="true" />
+                <element signature="e#2999#3000#0" expanded="true" />
+                <element signature="e#3025#3026#0" expanded="true" />
+                <element signature="e#3051#3059#0" expanded="true" />
+                <element signature="e#3128#3136#0" expanded="true" />
+                <element signature="e#3200#3208#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,8 +172,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/GameEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+            <state relative-caret-position="-444">
+              <caret line="57" column="27" lean-forward="true" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#707#708#0" expanded="true" />
@@ -162,10 +184,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/Clue.java">
+        <entry file="file://$PROJECT_DIR$/src/com/example/Data.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-end-line="11" />
+            <state relative-caret-position="486">
+              <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/com/example/ClueTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1761#1769#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,8 +212,8 @@
         <entry file="file://$PROJECT_DIR$/DEVELOPMENT.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="570">
-                <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+              <first_editor relative-caret-position="353">
+                <caret line="34" column="78" selection-start-line="34" selection-start-column="78" selection-end-line="34" selection-end-column="78" />
               </first_editor>
               <second_editor />
             </state>
@@ -183,19 +221,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Data/custom.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-469">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/com/example/GameEngineTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="192" column="5" lean-forward="true" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
+            <state relative-caret-position="476">
+              <caret line="132" column="24" selection-start-line="132" selection-start-column="24" selection-end-line="132" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -206,20 +235,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/com/example/AdventureTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
+            <state relative-caret-position="2241">
               <caret line="173" column="5" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Data/siebel.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -255,17 +275,18 @@
         <option value="$PROJECT_DIR$/src/com/example/Main.java" />
         <option value="$PROJECT_DIR$/Data/SiebelJson.txt" />
         <option value="$PROJECT_DIR$/src/com/example/Room.java" />
-        <option value="$PROJECT_DIR$/src/com/example/Player.java" />
-        <option value="$PROJECT_DIR$/DEVELOPMENT.md" />
         <option value="$PROJECT_DIR$/Data/custom.json" />
-        <option value="$PROJECT_DIR$/src/com/example/Clue.java" />
         <option value="$PROJECT_DIR$/test/com/example/AdventureTest.java" />
+        <option value="$PROJECT_DIR$/DEVELOPMENT.md" />
         <option value="$PROJECT_DIR$/test/com/example/GameEngineTest.java" />
+        <option value="$PROJECT_DIR$/src/com/example/Player.java" />
+        <option value="$PROJECT_DIR$/test/com/example/ClueTest.java" />
+        <option value="$PROJECT_DIR$/src/com/example/Clue.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="714" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectView">
@@ -273,8 +294,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -317,14 +339,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550181088010" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550617466222" />
     <property name="jdk.selected.JAVA_MODULE" value="10" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -351,7 +372,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GameEngineTest">
+  <component name="RunManager" selected="JUnit.ClueTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.Main" />
       <module name="adventure-jmoh3" />
@@ -379,19 +400,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UrlReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.UrlReader" />
-      <module name="adventure-jmoh3" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AdventureTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="adventure-jmoh3" />
       <extension name="coverage">
@@ -402,6 +410,20 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example" />
       <option name="MAIN_CLASS_NAME" value="com.example.AdventureTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClueTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="adventure-jmoh3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example" />
+      <option name="MAIN_CLASS_NAME" value="com.example.ClueTest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -422,18 +444,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.PlayAdventure" />
-      <item itemvalue="Application.UrlReader" />
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.AdventureTest" />
       <item itemvalue="JUnit.GameEngineTest" />
+      <item itemvalue="JUnit.ClueTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ClueTest" />
         <item itemvalue="JUnit.GameEngineTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.AdventureTest" />
         <item itemvalue="Application.PlayAdventure" />
-        <item itemvalue="Application.UrlReader" />
       </list>
     </recent_temporary>
   </component>
@@ -560,39 +582,60 @@
       <option name="project" value="LOCAL" />
       <updated>1550172184605</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Add items to Room class, Player class, ability to pick up and drop items, update DEVELOPMENT.md">
+      <created>1550180980369</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1550180980369</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fix markdown?">
+      <created>1550181058271</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1550181058271</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fix Markdown">
+      <created>1550181144542</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1550181144542</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AdventureTest - 2019.02.13 at 16h 34m 29s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 48m 40s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.13 at 22h 51m 10s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 49m 48s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.13 at 22h 53m 25s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 49m 58s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.13 at 22h 53m 52s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 51m 12s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.13 at 22h 54m 13s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 51m 27s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.13 at 22h 54m 29s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 55m 50s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.13 at 22h 54m 58s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 16h 58m 11s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameEngineTest - 2019.02.13 at 22h 55m 13s.xml">
-      <configuration name="GameEngineTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 17h 00m 13s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AdventureTest - 2019.02.14 at 13h 09m 27s.xml">
-      <configuration name="AdventureTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 17h 00m 28s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GameEngineTest - 2019.02.14 at 13h 47m 29s.xml">
-      <configuration name="GameEngineTest" configurationId="JUnit" />
+    <history-entry file="ClueTest - 2019.02.19 at 17h 01m 11s.xml">
+      <configuration name="ClueTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -605,10 +648,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19027181" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1981402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -617,7 +660,37 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5891566" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28915662" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.21188119" />
+      <window_info anchor="bottom" id="CheckStyle" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.20722891" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" visible="true" weight="0.3297568" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1981402" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25421688" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -636,35 +709,6 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="right" id="Coverage" order="8" side_tool="true" visible="true" weight="0.3297568" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1485623" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22079208" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.21188119" />
-      <window_info anchor="bottom" id="CheckStyle" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32871288" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -688,7 +732,10 @@
     <MESSAGE value="Separate main method from PlayAdventure class, added more testing for getting Layout from URL." />
     <MESSAGE value="Add support for command line arguments, ability to read Layout json from filepath, testing" />
     <MESSAGE value="Update DEVELOPMENT.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update DEVELOPMENT.md" />
+    <MESSAGE value="Add items to Room class, Player class, ability to pick up and drop items, update DEVELOPMENT.md" />
+    <MESSAGE value="Fix markdown?" />
+    <MESSAGE value="Fix Markdown" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Markdown" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -731,16 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/test/adventure-jmoh3/com/example/AdventureTest.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -748,69 +785,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Layout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/GameEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#707#708#0" expanded="true" />
-            <element signature="e#746#747#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding>
-            <element signature="e#607#608#0" expanded="true" />
-            <element signature="e#646#647#0" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-            <element signature="e#670#671#0" expanded="true" />
-            <element signature="e#905#906#0" expanded="true" />
-            <element signature="e#951#952#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Clue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DEVELOPMENT.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="570">
-            <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -824,39 +802,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Room.java">
+    <entry file="file://$PROJECT_DIR$/Data/siebel.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="97" column="33" lean-forward="true" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+        <state relative-caret-position="165">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Layout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="838">
+          <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1934#1935#0" expanded="true" />
-            <element signature="e#1955#1956#0" expanded="true" />
-            <element signature="e#2329#2330#0" expanded="true" />
-            <element signature="e#2379#2380#0" expanded="true" />
-            <element signature="e#2529#2530#0" expanded="true" />
-            <element signature="e#2555#2556#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Data/custom.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-469">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Data/siebel.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        <state relative-caret-position="448">
+          <caret line="162" column="16" lean-forward="true" selection-start-line="162" selection-start-column="16" selection-end-line="162" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/com/example/AdventureTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
+        <state relative-caret-position="2241">
           <caret line="173" column="5" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -864,12 +836,146 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/com/example/GameEngineTest.java">
+    <entry file="file://$PROJECT_DIR$/DEVELOPMENT.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="353">
+            <caret line="34" column="78" selection-start-line="34" selection-start-column="78" selection-end-line="34" selection-end-column="78" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="192" column="5" lean-forward="true" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
+        <state relative-caret-position="-731">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2329#2330#0" expanded="true" />
+            <element signature="e#2379#2380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/junit-4.12.jar!/junit/framework/TestCase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="e#2379#2380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/example/GameEngineTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="132" column="24" selection-start-line="132" selection-start-column="24" selection-end-line="132" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#844#845#0" expanded="true" />
+            <element signature="e#863#864#0" expanded="true" />
+            <element signature="e#954#955#0" expanded="true" />
+            <element signature="e#987#988#0" expanded="true" />
+            <element signature="e#1044#1045#0" expanded="true" />
+            <element signature="e#1063#1064#0" expanded="true" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+            <element signature="e#1270#1271#0" expanded="true" />
+            <element signature="e#1307#1308#0" expanded="true" />
+            <element signature="e#1352#1353#0" expanded="true" />
+            <element signature="e#1416#1417#0" expanded="true" />
+            <element signature="e#1476#1477#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1583#1584#0" expanded="true" />
+            <element signature="e#1630#1631#0" expanded="true" />
+            <element signature="e#1682#1683#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/GameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-444">
+          <caret line="57" column="27" lean-forward="true" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#707#708#0" expanded="true" />
+            <element signature="e#746#747#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/example/ClueTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1761#1769#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/util/AbstractList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="166" selection-start-line="166" selection-end-line="166" />
+          <folding>
+            <element signature="e#5502#5503#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Clue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#785#791#0" expanded="true" />
+            <element signature="e#2022#2023#0" expanded="true" />
+            <element signature="e#2059#2060#0" expanded="true" />
+            <element signature="e#2103#2104#0" expanded="true" />
+            <element signature="e#2142#2143#0" expanded="true" />
+            <element signature="e#2796#2797#0" expanded="true" />
+            <element signature="e#2830#2831#0" expanded="true" />
+            <element signature="e#2857#2858#0" expanded="true" />
+            <element signature="e#2893#2894#0" expanded="true" />
+            <element signature="e#2930#2931#0" expanded="true" />
+            <element signature="e#2963#2964#0" expanded="true" />
+            <element signature="e#2999#3000#0" expanded="true" />
+            <element signature="e#3025#3026#0" expanded="true" />
+            <element signature="e#3051#3059#0" expanded="true" />
+            <element signature="e#3128#3136#0" expanded="true" />
+            <element signature="e#3200#3208#0" expanded="true" />
           </folding>
         </state>
       </provider>
