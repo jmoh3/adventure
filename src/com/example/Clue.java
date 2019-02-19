@@ -11,24 +11,40 @@ import java.util.Random;
  */
 public class Clue {
 
-    /** Names of characters in game. */
-    private GameEngine gameEngine;
+    /** Layout being used for game. */
     private Layout layout;
+
+    /** Names of characters in game. */
     private List<String> characterNames;
+
+    /** Names of rooms in game. */
     private List<String> roomNames;
+
+    /** Names of weapons in game. */
     private List<String> weaponNames;
 
+    /** Correct murderer. */
     private String murderer;
+
+    /** Correct murder weapon. */
     private String weapon;
+
+    /** Correct scene of the crime. */
     private String room;
 
+    /** Players of game (1 less than total character names). */
     private Player[] players;
 
+    /**
+     * Creates and sets up a Clue object from layout and list of character names.
+     *
+     * @param setLayout layout to be used.
+     * @param charNames names of characters to be used.
+     */
     public Clue(Layout setLayout, List<String> charNames) {
         this.layout = setLayout;
         this.roomNames = new ArrayList<String>();
         this.weaponNames = new ArrayList<String>();
-        this.gameEngine = new GameEngine(layout);
         this.characterNames = charNames;
 
         setUpFromLayout(layout);
@@ -36,16 +52,30 @@ public class Clue {
         this.players = setUpPlayers(this.characterNames);
     }
 
+    /**
+     * Sets up room name list and weapon name list from given layout.
+     *
+     * @param layout layout to get weapons and rooms from.
+     */
     private void setUpFromLayout(Layout layout) {
         List<Room> seen = new ArrayList<Room>();
 
-        setUpHelper(gameEngine.getRoom(layout.getStartingRoom()), seen);
+        GameEngine gameEngine = new GameEngine(layout);
+
+        setUpHelper(gameEngine.getRoom(layout.getStartingRoom()), seen, gameEngine);
     }
 
+    /**
+     * Sets up array of Player objects from character names.
+     *
+     * @param characterNames names of characters.
+     * @return array of instantiated Player objects.
+     */
     public Player[] setUpPlayers(List<String> characterNames) {
         Player[] createdPlayers = new Player[characterNames.size() - 1];
 
         for (int i = 0; i < characterNames.size() - 1; i++) {
+            GameEngine gameEngine = new GameEngine(layout);
             createdPlayers[i] = new Player(characterNames.get(i), gameEngine);
         }
 
@@ -61,7 +91,7 @@ public class Clue {
      * @param seen Rooms that we have already seen.
      * @return true if the ending room has been reached.
      */
-    private void setUpHelper(Room current, List<Room> seen) {
+    private void setUpHelper(Room current, List<Room> seen, GameEngine gameEngine) {
         if (current.getName().equals(layout.getEndingRoom())) {
             return;
         }
@@ -80,34 +110,73 @@ public class Clue {
             if (seen.contains(nextRoom)) {
                 continue;
             }
-            setUpHelper(nextRoom, seen);
+            setUpHelper(nextRoom, seen, gameEngine);
         }
     }
 
+    /**
+     * Getter for room names.
+     *
+     * @return list of room names.
+     */
     public List<String> getRoomNames() {
         return this.roomNames;
     }
 
+    /**
+     * Getter for weapon names.
+     *
+     * @return list of weapon names.
+     */
     public List<String> getWeaponNames() {
         return this.weaponNames;
     }
 
+    /**
+     * Getter for room names.
+     *
+     * @return list of room names.
+     */
     public Player[] getPlayers() {
         return this.players;
     }
 
+    /**
+     * Getter for correct murderer.
+     *
+     * @return name of murderer.
+     */
     public String getMurderer() {
         return this.murderer;
     }
 
+    /**
+     * Getter for correct weapon name.
+     *
+     * @return name of murder weapon.
+     */
     public String getWeapon() {
         return this.weapon;
     }
 
+    /**
+     * Getter for correct room name.
+     *
+     * @return name of correct room where murder took place.
+     */
     public String getRoom() {
         return this.room;
     }
 
+    /**
+     * Deals all the "cards" for clue game - gives out pieces of information on known innocent character names,
+     * incorrect weapon names, and incorrect room names.
+     *
+     * @param setCharacterNames character names.
+     * @param setWeaponNames weapon names.
+     * @param setRoomNames room names.
+     * @param players list of players.
+     */
     public void dealCards(List<String> setCharacterNames, List<String> setWeaponNames, List<String> setRoomNames, Player[] players) {
         List<String> characterNames = new ArrayList<String>(setCharacterNames);
         List<String> weaponNames = new ArrayList<String>(setWeaponNames);
