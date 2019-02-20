@@ -130,6 +130,9 @@ public class Clue {
         }
     }
 
+    /**
+     * Plays an entire clue game.
+     */
     public void playGame() {
         int playerIndex = 0;
 
@@ -208,9 +211,12 @@ public class Clue {
             return Actions.INVALID_INPUT;
         }
 
-        if (userDirections.equals("GUESS")) {
+        if (userDirections.equals("GUESS") && players[playerIndex].getItem() != null) {
             handleFinalGuess(playerIndex);
             return Actions.FINAL_GUESS;
+        } else if (userDirections.equals("GUESS"))  {
+            System.out.println("You may not guess unless you're currently carrying an item.");
+            return Actions.INVALID_INSTRUCTION;
         }
 
         String instructions = userDirections.toLowerCase();
@@ -409,7 +415,7 @@ public class Clue {
      * @return true if guess was correct, false otherwise.
      */
     public boolean finalGuess(String murdererGuess, String weaponGuess, String roomGuess) {
-        return (murdererGuess.equals(murderer) && weaponGuess.equals(weapon) && roomGuess.equals(room));
+        return (murdererGuess.equalsIgnoreCase(murderer) && weaponGuess.equalsIgnoreCase(weapon) && roomGuess.equalsIgnoreCase(room));
     }
 
     /**

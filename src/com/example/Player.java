@@ -5,11 +5,22 @@ import java.util.List;
 
 public class Player {
 
+    /** Player name. */
     private String name;
+
+    /** Game engine. */
     private GameEngine gameEngine;
+
+    /** Characters that this players know is innocent. */
     private List<String> knownInnocent;
+
+    /** Weapons that this player knows aren't correct. */
     private List<String> knownWeapons;
+
+    /** Rooms that this player knows aren't correct. */
     private List<String> knownRooms;
+
+    /** Item that player is carrying. */
     private String item;
 
     /**
