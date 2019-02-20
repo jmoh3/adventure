@@ -8,7 +8,7 @@ I was directed by my code moderator to make the following changes.
 * Creating more new lines in readURL :ballot_box_with_check:
 * Renaming getRoomForDirection to getRoomFromDirection :ballot_box_with_check:
 * Using /** */ for comments regarding descriptions rather than // :ballot_box_with_check:
-* Magic number in formatDirections
+* Magic number in formatDirections :ballot_box_with_check:
 
 ## Changes that require more restructuring:
 * Adding another class to keep track of game state and input handling. I will create a GameEngine class in order to accomplish this and separate my main function from the PlayAdventure class so that my methods are better organized. :ballot_box_with_check:

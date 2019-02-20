@@ -14,6 +14,8 @@ public class PlayAdventure {
     private static Layout layout;
     private static GameEngine gameEngine;
 
+    private static final int MIN_NUMBER_OF_WORDS_FOR_COMMA_USAGE = 2;
+
     /**
      * Sets up Layout and GameEngine objects from url to Layout JSON.
      *
@@ -111,7 +113,7 @@ public class PlayAdventure {
     public static String formatDirections(Room room) {
         String output = "";
         for (int i = 0; i < room.getDirections().length; i++) {
-            if (i > 0 && room.getDirections().length > 2) {
+            if (i > 0 && room.getDirections().length > MIN_NUMBER_OF_WORDS_FOR_COMMA_USAGE) {
                 output = output + ",";
             }
             if (i == room.getDirections().length - 1 && room.getDirections().length > 1) {
@@ -135,7 +137,7 @@ public class PlayAdventure {
 
         String output = "";
         for (int i = 0; i < room.getItems().size(); i++) {
-            if (i > 0 && room.getItems().size() > 2) {
+            if (i > 0 && room.getItems().size() > MIN_NUMBER_OF_WORDS_FOR_COMMA_USAGE) {
                 output = output + ",";
             }
             if (i == room.getItems().size() - 1 && room.getItems().size() > 1) {
