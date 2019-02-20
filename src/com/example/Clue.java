@@ -1,15 +1,21 @@
 package com.example;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * A five player game in which users try to guess the name of the murderer, the weapon, and the location.
  * Users can navigate through rooms, and pickup items.
  */
 public class Clue {
+
+    enum Actions {
+        INVALID_INPUT,
+        INVALID_INSTRUCTION,
+        MOVE,
+        PICKUP,
+        DROP,
+        GUESS
+    }
 
     /** Layout being used for game. */
     private Layout layout;
@@ -112,6 +118,224 @@ public class Clue {
             }
             setUpHelper(nextRoom, seen, gameEngine);
         }
+    }
+
+    /**
+     * Given a player index and that player's directions, returns an enum describing the actions the player took.
+     *
+     * @param userDirections String input from player describing what actions in game to take.
+     * @param playerIndex index corresponding to player whose turn it is.
+     * @return Actions enum describing what the player did.
+     */
+    private Actions handleUserDirections(final String userDirections, int playerIndex) {
+        if (userDirections == null || userDirections.length() == 0) {
+            return Actions.INVALID_INPUT;
+        }
+
+        String directions = userDirections.toLowerCase();
+        String[] directionSplit = directions.split(" ");
+
+        if (directionSplit.length == 0) {
+            return Actions.INVALID_INPUT;
+        }
+
+        if (directionSplit[0].equals("go")) {
+            try {
+                players[playerIndex].changeRooms(directionSplit[1]);
+                return Actions.MOVE;
+            } catch (Exception e) {
+                return Actions.INVALID_INSTRUCTION;
+            }
+        }
+
+        if (directionSplit[0].equals("drop")) {
+            boolean success = players[playerIndex].dropItem();
+            if (success) {
+                return Actions.DROP;
+            } else {
+                return Actions.INVALID_INSTRUCTION;
+            }
+        }
+
+        if (directionSplit[0].equals("pickup")) {
+            boolean success = players[playerIndex].pickupItem(directionSplit[1]);
+            if (success) {
+                return Actions.PICKUP;
+            } else {
+                return Actions.INVALID_INSTRUCTION;
+            }
+        }
+
+        if (directionSplit[0].equals("drop")) {
+            boolean success = players[playerIndex].dropItem();
+            if (success) {
+                return Actions.DROP;
+            } else {
+                return Actions.INVALID_INSTRUCTION;
+            }
+        }
+
+        if (directionSplit[0].equals("guess")) {
+            return Actions.GUESS;
+        }
+
+        return Actions.INVALID_INPUT;
+    }
+
+    /**
+     * Allows user to type in guesses that will be cross checked with the information of the player to their left.
+     */
+    public void handleGuess() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Who do you think is the murderer?");
+
+        String murdererGuess = scanner.nextLine();
+
+        boolean goodInput = handleMurdererGuess(murdererGuess);
+
+        while (!goodInput) {
+            System.out.println("Invalid character name. Please try again.");
+            murdererGuess = scanner.nextLine();
+            goodInput = handleMurdererGuess(murdererGuess);
+        }
+
+        System.out.println("What do you think is the murder weapon?");
+
+        String weaponGuess = scanner.nextLine();
+
+        goodInput = handleMurdererGuess(weaponGuess);
+
+        while (!goodInput) {
+            System.out.println("Invalid weapon name. Please try again.");
+            weaponGuess = scanner.nextLine();
+            goodInput = handleWeaponGuess(weaponGuess);
+        }
+
+        System.out.println("Where do you think the murder took place?");
+
+        String roomGuess = scanner.nextLine();
+
+        goodInput = handleRoomGuess(roomGuess);
+
+        while (!goodInput) {
+            System.out.println("Invalid room name. Please try again.");
+            roomGuess = scanner.nextLine();
+            goodInput = handleWeaponGuess(roomGuess);
+        }
+
+    }
+
+    /**
+     * Determines whether input for murderer guess is valid or not.
+     *
+     * @param guess player's guess.
+     * @return true if valid character name, false otherwise.
+     */
+    public boolean handleMurdererGuess(String guess) {
+        for (String character : this.characterNames) {
+            if (character.equalsIgnoreCase(guess)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determines whether input for weapon guess is valid or not.
+     *
+     * @param guess player's guess.
+     * @return true if valid weapon name, false otherwise.
+     */
+    public boolean handleWeaponGuess(String guess) {
+        for (String weapon : this.weaponNames) {
+            if (weapon.equalsIgnoreCase(guess)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determines whether input for room guess is valid or not.
+     *
+     * @param guess player's guess.
+     * @return true if valid room name, false otherwise.
+     */
+    public boolean handleRoomGuess(String guess) {
+        for (String room : this.roomNames) {
+            if (room.equalsIgnoreCase(guess)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns information gained from cross check of guess by player to left.
+     *
+     * @param murdererGuess current player's murderer guess.
+     * @param weaponGuess current player's weapon guess.
+     * @param roomGuess current player's room guess.
+     * @param playerIndex index corresponding to player whose turn it is.
+     * @return boolean array corresponding to whether murderer guess is innocent, weapon guess is wrong, and room guess is wrong.
+     */
+    public boolean[] guess(String murdererGuess, String weaponGuess, String roomGuess, int playerIndex) {
+        boolean[] disprovedGuesses = new boolean[3];
+
+        Player playerToLeft = players[(playerIndex + 1) % players.length];
+
+        disprovedGuesses[0] = playerToLeft.characterIsInnocent(murdererGuess);
+        disprovedGuesses[1] = playerToLeft.hasObject(weaponGuess);
+        disprovedGuesses[2] = playerToLeft.hasRoom(roomGuess);
+
+        return disprovedGuesses;
+    }
+
+    /**
+     * Formats the response to a player's guess.
+     *
+     * @param murdererGuess current player's murderer guess.
+     * @param weaponGuess current player's weapon guess.
+     * @param roomGuess current player's room guess.
+     * @param playerIndex index corresponding to player whose turn it is.
+     * @param response boolean array of responses to guess.
+     * @return String displaying feedback on guesses.
+     */
+    public String formatGuessResponse(String murdererGuess, String weaponGuess, String roomGuess, int playerIndex, boolean[] response) {
+        String output = "";
+
+        if (response[0]) {
+            output += murdererGuess + " is innocent!";
+        } else {
+            output += "No new character information.";
+        }
+
+        if (response[1]) {
+            output += "\n" + weaponGuess + " is not the murder weapon.";
+        } else {
+            output += "\n" + "No new weapon information.";
+        }
+
+        if (response[2]) {
+            output += "\n" + roomGuess + " is not the scene of the crime.";
+        } else {
+            output += "\n" + "No new room information.";
+        }
+
+        return output;
+    }
+
+    /**
+     * Big final guess for correct murder information, will terminate game.
+     *
+     * @param murdererGuess current player's murderer guess.
+     * @param weaponGuess current player's weapon guess.
+     * @param roomGuess current player's room guess.
+     * @return true if guess was correct, false otherwise.
+     */
+    public boolean bigGuess(String murdererGuess, String weaponGuess, String roomGuess) {
+        return (murdererGuess.equals(murderer) && weaponGuess.equals(weapon) && roomGuess.equals(room));
     }
 
     /**
