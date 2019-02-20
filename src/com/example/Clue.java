@@ -48,7 +48,7 @@ public class Clue {
     private final int ALLOWED_ACTIONS_PER_TURN = 3;
 
     /** String describing user's options for directions. */
-    private final String USER_INSTRUCTIONS = "You may change rooms (type 'go <room name>'), pickup an item (type 'pickup <item name>'), drop an item (type 'drop'), guess (type 'guess'), or final guess (type 'GUESS')";
+    private final String USER_INSTRUCTIONS = "You may change rooms (type 'go <direction>'), pickup an item (type 'pickup <item name>'), drop an item (type 'drop'), guess (type 'guess'), or final guess (type 'GUESS')";
 
 
     /**
@@ -165,10 +165,15 @@ public class Clue {
         System.out.println(currentRoom.getDescription());
         System.out.println("From here, you may go" + PlayAdventure.formatDirections(currentRoom));
 
-        if (currentRoom.getItems() != null && currentRoom.getItems().size() > 0) {
+        if (currentRoom.getItems() != null && currentRoom.getItems().size() > 0 && players[playerIndex].getItem() == null) {
             System.out.println("You may pickup" + PlayAdventure.formatItems(currentRoom));
         }
 
+        if (players[playerIndex].getItem() != null) {
+            System.out.println("You are carrying: " + players[playerIndex].getItem());
+        }
+
+        System.out.println();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -208,23 +213,23 @@ public class Clue {
             return Actions.FINAL_GUESS;
         }
 
-        String directions = userDirections.toLowerCase();
-        String[] directionSplit = directions.split(" ");
+        String instructions = userDirections.toLowerCase();
+        String[] splitInstructions = instructions.split(" ");
 
-        if (directionSplit.length == 0) {
+        if (splitInstructions.length == 0) {
             return Actions.INVALID_INPUT;
         }
 
-        if (directionSplit[0].equals("go")) {
+        if (splitInstructions[0].equals("go")) {
             try {
-                players[playerIndex].changeRooms(directionSplit[1]);
+                players[playerIndex].changeRooms(splitInstructions[1]);
                 return Actions.MOVE;
             } catch (Exception e) {
                 return Actions.INVALID_INSTRUCTION;
             }
         }
 
-        if (directionSplit[0].equals("drop")) {
+        if (splitInstructions[0].equals("drop")) {
             boolean success = players[playerIndex].dropItem();
             if (success) {
                 return Actions.DROP;
@@ -233,8 +238,8 @@ public class Clue {
             }
         }
 
-        if (directionSplit[0].equals("pickup")) {
-            boolean success = players[playerIndex].pickupItem(directionSplit[1]);
+        if (splitInstructions[0].equals("pickup")) {
+            boolean success = players[playerIndex].pickupItem(splitInstructions[1]);
             if (success) {
                 return Actions.PICKUP;
             } else {
@@ -242,15 +247,16 @@ public class Clue {
             }
         }
 
-        if (directionSplit[0].equals("quit")) {
+        if (splitInstructions[0].equals("quit")) {
             return Actions.QUIT;
         }
 
-        if (directionSplit[0].equals("guess") && players[playerIndex].getItem() != null) {
+        if (splitInstructions[0].equals("guess") && players[playerIndex].getItem() != null) {
             handleGuess(playerIndex);
             return Actions.GUESS;
-        } else if (directionSplit[0].equals("guess")) {
+        } else if (splitInstructions[0].equals("guess")) {
             System.out.println("You may not guess unless you're currently carrying an item.");
+            return Actions.INVALID_INSTRUCTION;
         }
 
         return Actions.INVALID_INPUT;
@@ -282,6 +288,7 @@ public class Clue {
 
         boolean[] response = guess(murdererGuess, weaponGuess, roomGuess, playerIndex);
 
+        System.out.println();
         System.out.println(formatGuessResponse(murdererGuess, weaponGuess, roomGuess, playerIndex, response));
     }
 
@@ -353,7 +360,7 @@ public class Clue {
         Player playerToLeft = players[(playerIndex + 1) % players.length];
 
         disprovedGuesses[0] = playerToLeft.characterIsInnocent(murdererGuess);
-        disprovedGuesses[1] = playerToLeft.hasObject(weaponGuess);
+        disprovedGuesses[1] = playerToLeft.hasWeapon(weaponGuess);
         disprovedGuesses[2] = playerToLeft.hasRoom(roomGuess);
 
         return disprovedGuesses;

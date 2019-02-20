@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private GameEngine gameEngine;
     private List<String> knownInnocent;
-    private List<String> knownObjects;
+    private List<String> knownWeapons;
     private List<String> knownRooms;
     private String item;
 
@@ -24,7 +24,7 @@ public class Player {
         this.gameEngine = setGameEngine;
 
         this.knownInnocent = new ArrayList<String>();
-        this.knownObjects = new ArrayList<String>();
+        this.knownWeapons = new ArrayList<String>();
         this.knownRooms = new ArrayList<String>();
     }
 
@@ -44,11 +44,17 @@ public class Player {
      * @return true if succeeds, false otherwise.
      */
     public boolean pickupItem(String toPickup) {
-        if (item != null) {
+        if (this.item != null) {
             return false;
         }
         try {
-            return this.gameEngine.getCurrentRoom().removeItem(toPickup);
+            boolean success = this.gameEngine.getCurrentRoom().removeItem(toPickup);
+            if (success) {
+                this.item = toPickup;
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }
@@ -82,7 +88,7 @@ public class Player {
      * @param objectName name of incorrect murder weapon.
      */
     public void addKnownObject(String objectName) {
-        this.knownObjects.add(objectName);
+        this.knownWeapons.add(objectName);
     }
 
     /**
@@ -136,7 +142,7 @@ public class Player {
      * @return incorrect weapon names.
      */
     public List<String> getKnownWeapons() {
-        return this.knownObjects;
+        return this.knownWeapons;
     }
 
     /**
@@ -155,7 +161,17 @@ public class Player {
      * @return true if character is known innocent, false otherwise.
      */
     public boolean characterIsInnocent(String characterName) {
-        return knownInnocent.contains(characterName);
+        if (characterName == null) {
+            return false;
+        }
+
+        for (String character : this.knownInnocent) {
+            if (character.equalsIgnoreCase(characterName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -164,8 +180,18 @@ public class Player {
      * @param objectName object name to be asked about.
      * @return true if object is known to be incorrect, false otherwise.
      */
-    public boolean hasObject(String objectName) {
-        return knownObjects.contains(objectName);
+    public boolean hasWeapon(String objectName) {
+        if (objectName == null) {
+            return false;
+        }
+
+        for (String item : this.knownWeapons) {
+            if (item.equalsIgnoreCase(objectName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -175,7 +201,17 @@ public class Player {
      * @return true if roomName is known incorrect, false otherwise.
      */
     public boolean hasRoom(String roomName) {
-        return knownRooms.contains(roomName);
+        if (roomName == null) {
+            return false;
+        }
+
+        for (String room : this.knownRooms) {
+            if (room.equalsIgnoreCase(roomName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -86,7 +87,14 @@ public class Room {
      * @return true if remove was successful, false otherwise.
      */
     public boolean removeItem(String itemName) {
-        return this.items.remove(itemName);
+        for (String item : this.items) {
+            if (itemName.equalsIgnoreCase(item)) {
+                this.items.remove(item);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -95,6 +103,10 @@ public class Room {
      * @param itemName item to drop.
      */
     public void dropItem(String itemName) {
+        if (this.items == null) {
+            this.items = new ArrayList<String>();
+        }
+
         this.items.add(itemName);
     }
 

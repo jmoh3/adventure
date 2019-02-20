@@ -9,7 +9,7 @@ public class PlayClue {
     public static void main(String[] args) {
         Layout layout = Layout.getLayoutFromFilepath("custom.json");
         List<String> characterNames = new ArrayList<String>(
-                Arrays.asList("ProfessorPlum", "ColonelMustard", "MissScarlett", "MrsWhite", "MrGreen", "MrsPeacock")
+                Arrays.asList("ProfessorPlum", "ColonelMustard", "MissScarlett")
         );
 
         Clue clueGame = new Clue(layout, characterNames);

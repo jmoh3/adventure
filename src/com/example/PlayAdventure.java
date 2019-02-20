@@ -115,7 +115,7 @@ public class PlayAdventure {
                 output = output + ",";
             }
             if (i == room.getDirections().length - 1 && room.getDirections().length > 1) {
-                output = output + " and";
+                output = output + " or";
             }
             output = output + " " + room.getDirections()[i].getDirectionName();
         }
@@ -139,7 +139,7 @@ public class PlayAdventure {
                 output = output + ",";
             }
             if (i == room.getItems().size() - 1 && room.getItems().size() > 1) {
-                output = output + " and";
+                output = output + " or";
             }
             output = output + " " + room.getItems().get(i);
         }
