@@ -34,6 +34,8 @@ In order to implement this game, I will:
 * Create a Player class :ballot_box_with_check:
     * Store name, Player's information on murder, item :ballot_box_with_check:
     * Provide ability to change rooms, pick up, and drop items. :ballot_box_with_check:
-* Create a Clue class that handles the internals of the game
-    * Store correct information about the murder
-    * Prompt and handle user input
+* Create a Clue class that handles the internals of the game :ballot_box_with_check:
+    * Store correct information about the murder :ballot_box_with_check:
+    * Prompt and handle user input :ballot_box_with_check:
+    
+To play this game, run the main method in PlayClue and follow the printed instructions. Enjoy!
