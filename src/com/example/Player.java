@@ -44,7 +44,14 @@ public class Player {
      * @return true if succeeds, false otherwise.
      */
     public boolean pickupItem(String toPickup) {
-        return this.gameEngine.getCurrentRoom().removeItem(toPickup);
+        if (item != null) {
+            return false;
+        }
+        try {
+            return this.gameEngine.getCurrentRoom().removeItem(toPickup);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -94,6 +101,24 @@ public class Player {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Getter for item that player is holding.
+     *
+     * @return item.
+     */
+    public String getItem() {
+        return this.item;
+    }
+
+    /**
+     * Getter for player's current room.
+     *
+     * @return current room.
+     */
+    public Room getCurrentRoom() {
+        return this.gameEngine.getCurrentRoom();
     }
 
     /**

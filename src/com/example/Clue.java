@@ -8,13 +8,16 @@ import java.util.*;
  */
 public class Clue {
 
+    /** Enum describing possible actions a player could take during a turn. */
     enum Actions {
         INVALID_INPUT,
         INVALID_INSTRUCTION,
         MOVE,
         PICKUP,
         DROP,
-        GUESS
+        GUESS,
+        FINAL_GUESS,
+        QUIT
     }
 
     /** Layout being used for game. */
@@ -40,6 +43,13 @@ public class Clue {
 
     /** Players of game (1 less than total character names). */
     private Player[] players;
+
+    /** Permitted actions per turn. */
+    private final int ALLOWED_ACTIONS_PER_TURN = 3;
+
+    /** String describing user's options for directions. */
+    private final String USER_INSTRUCTIONS = "You may change rooms (type 'go <room name>'), pickup an item (type 'pickup <item name>'), drop an item (type 'drop'), guess (type 'guess'), or final guess (type 'GUESS')";
+
 
     /**
      * Creates and sets up a Clue object from layout and list of character names.
@@ -120,6 +130,67 @@ public class Clue {
         }
     }
 
+    public void playGame() {
+        int playerIndex = 0;
+
+        boolean continueGame = true;
+
+        while (continueGame) {
+            playerIndex = (playerIndex + 1) % players.length;
+            System.out.println("=========================================================");
+            System.out.println("It is " + players[playerIndex].getName() + "'s turn!");
+            continueGame = playTurn(playerIndex, ALLOWED_ACTIONS_PER_TURN);
+        }
+    }
+
+    /**
+     * Allows player to take one turn. Will recurse until all their allowed actions are exhausted.
+     *
+     * @param playerIndex index corresponding to player whose turn iti s.
+     * @param allowedActionsLeft number of actions the player has.
+     */
+    public boolean playTurn(int playerIndex, int allowedActionsLeft) {
+        if (allowedActionsLeft == 0) {
+            return true;
+        }
+
+        System.out.println();
+        System.out.println("You have " + allowedActionsLeft + " actions left.");
+
+        System.out.println();
+        System.out.println(USER_INSTRUCTIONS);
+
+        Room currentRoom = players[playerIndex].getCurrentRoom();
+
+        System.out.println(currentRoom.getDescription());
+        System.out.println("From here, you may go" + PlayAdventure.formatDirections(currentRoom));
+
+        if (currentRoom.getItems() != null && currentRoom.getItems().size() > 0) {
+            System.out.println("You may pickup" + PlayAdventure.formatItems(currentRoom));
+        }
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        Actions actionChosen = handleUserDirections(input, playerIndex);
+
+        if (actionChosen == Actions.INVALID_INSTRUCTION) {
+            System.out.println("I can't " + input + ". Please try again.");
+            return playTurn(playerIndex, allowedActionsLeft);
+        } else if (actionChosen == Actions.INVALID_INPUT) {
+            System.out.println("I don't understand '" + input + "'. Please try again.");
+            return playTurn(playerIndex, allowedActionsLeft);
+        } else if (actionChosen == Actions.FINAL_GUESS) {
+            System.out.println("Game Over!");
+            return false;
+        } else if (actionChosen == Actions.QUIT) {
+            System.out.println("Game Over!");
+            return false;
+        }
+
+        return playTurn(playerIndex, allowedActionsLeft - 1);
+    }
+
     /**
      * Given a player index and that player's directions, returns an enum describing the actions the player took.
      *
@@ -127,9 +198,14 @@ public class Clue {
      * @param playerIndex index corresponding to player whose turn it is.
      * @return Actions enum describing what the player did.
      */
-    private Actions handleUserDirections(final String userDirections, int playerIndex) {
+    public Actions handleUserDirections(final String userDirections, int playerIndex) {
         if (userDirections == null || userDirections.length() == 0) {
             return Actions.INVALID_INPUT;
+        }
+
+        if (userDirections.equals("GUESS")) {
+            handleFinalGuess(playerIndex);
+            return Actions.FINAL_GUESS;
         }
 
         String directions = userDirections.toLowerCase();
@@ -166,17 +242,15 @@ public class Clue {
             }
         }
 
-        if (directionSplit[0].equals("drop")) {
-            boolean success = players[playerIndex].dropItem();
-            if (success) {
-                return Actions.DROP;
-            } else {
-                return Actions.INVALID_INSTRUCTION;
-            }
+        if (directionSplit[0].equals("quit")) {
+            return Actions.QUIT;
         }
 
-        if (directionSplit[0].equals("guess")) {
+        if (directionSplit[0].equals("guess") && players[playerIndex].getItem() != null) {
+            handleGuess(playerIndex);
             return Actions.GUESS;
+        } else if (directionSplit[0].equals("guess")) {
+            System.out.println("You may not guess unless you're currently carrying an item.");
         }
 
         return Actions.INVALID_INPUT;
@@ -185,7 +259,7 @@ public class Clue {
     /**
      * Allows user to type in guesses that will be cross checked with the information of the player to their left.
      */
-    public void handleGuess() {
+    public void handleGuess(int playerIndex) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Who do you think is the murderer?");
@@ -200,30 +274,48 @@ public class Clue {
             goodInput = handleMurdererGuess(murdererGuess);
         }
 
-        System.out.println("What do you think is the murder weapon?");
+        String weaponGuess = players[playerIndex].getItem();
+        System.out.println("Guessing " + weaponGuess  + " as the murder weapon.");
 
-        String weaponGuess = scanner.nextLine();
+        String roomGuess = players[playerIndex].getCurrentRoom().getName();
+        System.out.println("Guessing " + roomGuess + " as the scene of the crime.");
 
-        goodInput = handleMurdererGuess(weaponGuess);
+        boolean[] response = guess(murdererGuess, weaponGuess, roomGuess, playerIndex);
+
+        System.out.println(formatGuessResponse(murdererGuess, weaponGuess, roomGuess, playerIndex, response));
+    }
+
+    /**
+     * Allows user to make final guess.
+     */
+    public void handleFinalGuess(int playerIndex) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Who do you think is the murderer?");
+
+        String murdererGuess = scanner.nextLine();
+
+        boolean goodInput = handleMurdererGuess(murdererGuess);
 
         while (!goodInput) {
-            System.out.println("Invalid weapon name. Please try again.");
-            weaponGuess = scanner.nextLine();
-            goodInput = handleWeaponGuess(weaponGuess);
+            System.out.println("Invalid character name. Please try again.");
+            murdererGuess = scanner.nextLine();
+            goodInput = handleMurdererGuess(murdererGuess);
         }
 
-        System.out.println("Where do you think the murder took place?");
+        String weaponGuess = players[playerIndex].getItem();
+        System.out.println("Guessing " + weaponGuess  + " as the murder weapon.");
 
-        String roomGuess = scanner.nextLine();
+        String roomGuess = players[playerIndex].getCurrentRoom().getName();
+        System.out.println("Guessing " + roomGuess + " as the scene of the crime.");
 
-        goodInput = handleRoomGuess(roomGuess);
+        boolean guessCorrect = finalGuess(murdererGuess, weaponGuess, roomGuess);
 
-        while (!goodInput) {
-            System.out.println("Invalid room name. Please try again.");
-            roomGuess = scanner.nextLine();
-            goodInput = handleWeaponGuess(roomGuess);
+        if (guessCorrect) {
+            System.out.println(players[playerIndex].getName() + " is correct! It was " + this.murderer + " who committed the murder with the " + this.weapon + " in the " + this.room);
+        } else {
+            System.out.println(players[playerIndex].getName() + " was wrong! It was " + this.murderer + " who committed the murder with the " + this.weapon + " in the " + this.room);
         }
-
     }
 
     /**
@@ -233,41 +325,16 @@ public class Clue {
      * @return true if valid character name, false otherwise.
      */
     public boolean handleMurdererGuess(String guess) {
+        if (guess == null) {
+            return false;
+        }
+
         for (String character : this.characterNames) {
             if (character.equalsIgnoreCase(guess)) {
                 return true;
             }
         }
-        return false;
-    }
 
-    /**
-     * Determines whether input for weapon guess is valid or not.
-     *
-     * @param guess player's guess.
-     * @return true if valid weapon name, false otherwise.
-     */
-    public boolean handleWeaponGuess(String guess) {
-        for (String weapon : this.weaponNames) {
-            if (weapon.equalsIgnoreCase(guess)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Determines whether input for room guess is valid or not.
-     *
-     * @param guess player's guess.
-     * @return true if valid room name, false otherwise.
-     */
-    public boolean handleRoomGuess(String guess) {
-        for (String room : this.roomNames) {
-            if (room.equalsIgnoreCase(guess)) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -334,7 +401,7 @@ public class Clue {
      * @param roomGuess current player's room guess.
      * @return true if guess was correct, false otherwise.
      */
-    public boolean bigGuess(String murdererGuess, String weaponGuess, String roomGuess) {
+    public boolean finalGuess(String murdererGuess, String weaponGuess, String roomGuess) {
         return (murdererGuess.equals(murderer) && weaponGuess.equals(weapon) && roomGuess.equals(room));
     }
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 public class ClueTest {
@@ -85,6 +86,63 @@ public class ClueTest {
         known.add(clueGame.getRoom());
 
         assertTrue(roomNames.containsAll(known) && known.containsAll(roomNames));
+    }
+
+    @Test
+    public void invalidGoTest() {
+        Clue.Actions badAction = clueGame.handleUserDirections("go to heck", 0);
+
+        assertEquals(Clue.Actions.INVALID_INSTRUCTION, badAction);
+    }
+
+    @Test
+    public void invalidDropTest() {
+        Clue.Actions badAction = clueGame.handleUserDirections("drop", 0);
+
+        assertEquals(Clue.Actions.INVALID_INSTRUCTION, badAction);
+    }
+
+    @Test
+    public void invalidPickupTest() {
+        Clue.Actions badAction = clueGame.handleUserDirections("pickup deez nuts", 0);
+
+        assertEquals(Clue.Actions.INVALID_INSTRUCTION, badAction);
+    }
+
+    @Test
+    public void invalidDirectionsEmptyTest() {
+        Clue.Actions badAction = clueGame.handleUserDirections("", 0);
+
+        assertEquals(Clue.Actions.INVALID_INPUT, badAction);
+    }
+
+    @Test
+    public void invalidDirectionsNullTest() {
+        Clue.Actions badAction = clueGame.handleUserDirections(null, 0);
+
+        assertEquals(Clue.Actions.INVALID_INPUT, badAction);
+    }
+
+    @Test
+    public void quitTest() {
+        Clue.Actions action = clueGame.handleUserDirections("QuIT", 0);
+
+        assertEquals(Clue.Actions.QUIT, action);
+    }
+
+    @Test
+    public void handleMurdererGuessTestNull() {
+        assertEquals(false, clueGame.handleMurdererGuess(null));
+    }
+
+    @Test
+    public void handleMurdererGuessTestFalse() {
+        assertEquals(false, clueGame.handleMurdererGuess("hello"));
+    }
+
+    @Test
+    public void handleMurdererGuessTestValidInput() {
+        assertEquals(true, clueGame.handleMurdererGuess("ColonelMustard"));
     }
 
 }

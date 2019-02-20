@@ -108,7 +108,7 @@ public class PlayAdventure {
      * @param room current room.
      * @return a String listing available directions with appropriate punctuation and grammar.
      */
-    public String formatDirections(Room room) {
+    public static String formatDirections(Room room) {
         String output = "";
         for (int i = 0; i < room.getDirections().length; i++) {
             if (i > 0 && room.getDirections().length > 2) {
@@ -118,6 +118,30 @@ public class PlayAdventure {
                 output = output + " and";
             }
             output = output + " " + room.getDirections()[i].getDirectionName();
+        }
+        return output;
+    }
+
+    /**
+     * Formats the valid items in a room so that output is clean.
+     *
+     * @param room current room.
+     * @return a String listing items in room with appropriate punctuation and grammar.
+     */
+    public static String formatItems(Room room) {
+        if (room.getItems() == null || room.getItems().size() == 0) {
+            return "";
+        }
+
+        String output = "";
+        for (int i = 0; i < room.getItems().size(); i++) {
+            if (i > 0 && room.getItems().size() > 2) {
+                output = output + ",";
+            }
+            if (i == room.getItems().size() - 1 && room.getItems().size() > 1) {
+                output = output + " and";
+            }
+            output = output + " " + room.getItems().get(i);
         }
         return output;
     }
