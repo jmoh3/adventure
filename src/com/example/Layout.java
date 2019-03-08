@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 /**
  * A class that describes a layout of Rooms.
+ * New comment!
  */
 public class Layout {
 
