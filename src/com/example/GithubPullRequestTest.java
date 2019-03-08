@@ -18,6 +18,8 @@ public class GithubPullRequestTest {
             String oath = getOathKey();
             System.out.println(oath);
             createPullRequest("Testing automated pull requests", "testGithubPR", "master", "jmoh3/adventure", oath);
+//            System.out.println(oath);
+            createPullRequest("Testing automated pull requests", "testGithubPR", "master", "jmoh3/adventure", "f92f1d647adeb12b52a07e15d970691d3c504742");
         } catch (Exception e) {
             System.out.println("oops");
         }
@@ -48,7 +50,7 @@ public class GithubPullRequestTest {
                 final Content.Smart content = new Content.Smart(pathContent);
                 sha = content.sha();
 
-                File file = new File("/src/com/example/GameEngine.java");
+                File file = new File("/src/com/example/GithubPullRequestTest.java");
                 byte[] fileContent = Files.readAllBytes(file.toPath());
 
 //                System.out.println(content.decoded());
@@ -103,6 +105,15 @@ public class GithubPullRequestTest {
                                 .add("content", enc)
                                 .add("branch", head)
                                 .add("path", path)
+<<<<<<< HEAD
+=======
+                                .add(
+                                        "committer",
+                                        Json.createObjectBuilder()
+                                                .add("name", "Jackie Oh")
+                                                .add("email", "jmoh3@illinois.edu")
+                                )
+>>>>>>> d5717f78659e5dc55254265123d119272d204d7c
                                 .build()
                 );
 
