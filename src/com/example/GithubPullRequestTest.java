@@ -105,15 +105,6 @@ public class GithubPullRequestTest {
                                 .add("content", enc)
                                 .add("branch", head)
                                 .add("path", path)
-<<<<<<< HEAD
-=======
-                                .add(
-                                        "committer",
-                                        Json.createObjectBuilder()
-                                                .add("name", "Jackie Oh")
-                                                .add("email", "jmoh3@illinois.edu")
-                                )
->>>>>>> d5717f78659e5dc55254265123d119272d204d7c
                                 .build()
                 );
 
