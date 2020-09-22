@@ -4,12 +4,9 @@ import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-
 import static org.junit.Assert.assertEquals;
 
-public class AdventureTest {
+public class GameEngineTest {
 
     private static final String SIEBEL_JSON  = "{\n" +
             "  \"startingRoom\": \"MatthewsStreet\",\n" +
@@ -128,48 +125,70 @@ public class AdventureTest {
             "  ]\n" +
             "}";
 
-    private static Layout layout;
-    private static Layout custom;
+    private static GameEngine gameEngine;
 
     @Before
-    public void loadSiebelJson() throws Exception {
+    public void setUpNecessaryFields() {
         Gson gson = new Gson();
-        layout = gson.fromJson(SIEBEL_JSON, Layout.class);
-        custom = Layout.getLayoutFromFilepath("custom.json");
+        Layout layout = gson.fromJson(SIEBEL_JSON, Layout.class);
+        gameEngine = new GameEngine(layout);
     }
 
     @Test
-    public void getLayoutFromURLTest() throws Exception {
-        assertEquals(layout, Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/siebel.json"));
+    public void getRoomTest() throws Exception {
+        assertEquals("MatthewsStreet", gameEngine.getRoom("MatthewsStreet").getName());
     }
 
     @Test
-    public void getLayoutFromFilepathTest() throws Exception {
-        assertEquals(layout, Layout.getLayoutFromFilepath("siebel.json"));
-    }
-
-    @Test(expected = IOException.class)
-    public void getLayoutFromBadURLTest() throws Exception {
-        Layout.getLayoutFromURL("https://courses.engr.illinois.edu/cs126/adventure/sdf.json");
-    }
-
-    @Test(expected = MalformedURLException.class)
-    public void getLayoutFromMalformedURLTest() throws Exception {
-        Layout.getLayoutFromURL("sdkasvdkn");
+    public void getRoomDirectionsTest() throws Exception {
+        assertEquals(3, gameEngine.getRoom("SiebelEastHallway").getDirections().length);
     }
 
     @Test
-    public void getStartingRoomTest() throws Exception {
-        assertEquals("MatthewsStreet", layout.getStartingRoom());
+    public void getCurrentRoomTest() throws Exception {
+        assertEquals("MatthewsStreet", gameEngine.getCurrentRoom().getName());
     }
 
     @Test
-    public void getEndingRoomTest() throws Exception {
-        assertEquals("Siebel1314", layout.getEndingRoom());
+    public void changeRoomsTest() throws Exception {
+        assertEquals("SiebelEntry", gameEngine.changeRooms("East").getName());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void invalidChangeRoomsTest() throws Exception {
+        gameEngine.changeRooms("South").getName();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullChangeRoomsTest() throws Exception {
+        gameEngine.changeRooms(null).getName();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getNonexistentRoomTest() throws Exception {
+        gameEngine.getRoom("sdmvlkasd");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getNullRoomTest() throws Exception {
+        gameEngine.getRoom(null);
     }
 
     @Test
-    public void getRoomsTest() throws Exception {
-        assertEquals(8, layout.getRooms().length);
+    public void validateLayoutTrue() throws Exception {
+        assertEquals(true, gameEngine.validateLayout());
+    }
+
+    @Test
+    public void validateLayoutFalse() throws Exception {
+        Layout customLayout = Layout.getLayoutFromFilepath("custom.json");
+        GameEngine customGameEngine = new GameEngine(customLayout);
+
+        assertEquals(false, customGameEngine.validateLayout());
+    }
+
+    @Test
+    public void getItemsInRoomTest() throws Exception {
+        assertEquals("coin", gameEngine.getRoom("MatthewsStreet").getItems().get(0));
     }
 }

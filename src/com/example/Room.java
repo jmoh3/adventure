@@ -1,23 +1,28 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A class that describes a room.
  */
 public class Room {
 
-    // room name
+    /** room name */
     private String name;
-    // room description.
+    /** room name */
+    private List<String> items;
+    /** room description */
     private String description;
-    // available directions
+    /** available directions */
     private Direction[] directions;
-    // hashmap that has directions as keys and corresponding rooms as values
+    /** hashmap that has directions as keys and corresponding rooms as values */
     private HashMap<String, String> directionToRoomMap;
-    // makes sure the hashmap has been initialized before trying to use it
+    /** makes sure the hashmap has been initialized before trying to use it */
     private boolean hashMapLoaded = false;
+
 
     /**
      * Constructor that accepts a room name, description, and directions.
@@ -26,11 +31,12 @@ public class Room {
      * @param setDescription the description of the room.
      * @param setDirections the directions in which the user can navigate to from the room.
      */
-    public Room(String setName, String setDescription, Direction[] setDirections) {
+    public Room(String setName, String setDescription, Direction[] setDirections, List<String> setItems) {
         this.name = setName;
         this.description = setDescription;
         this.directions = setDirections;
         this.directionToRoomMap = new HashMap<String, String>();
+        this.items = setItems;
 
         for (Direction direction : directions) {
             directionToRoomMap.put(direction.getDirectionName(), direction.getRoom());
@@ -66,6 +72,45 @@ public class Room {
     }
 
     /**
+     * Returns items within room.
+     *
+     * @return List of items in that room.
+     */
+    public List<String> getItems() {
+        return this.items;
+    }
+
+    /**
+     * Removes an item from a room's item list.
+     *
+     * @param itemName name of item to remove.
+     * @return true if remove was successful, false otherwise.
+     */
+    public boolean removeItem(String itemName) {
+        for (String item : this.items) {
+            if (itemName.equalsIgnoreCase(item)) {
+                this.items.remove(item);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Allows user to drop an item in given room.
+     *
+     * @param itemName item to drop.
+     */
+    public void dropItem(String itemName) {
+        if (this.items == null) {
+            this.items = new ArrayList<String>();
+        }
+
+        this.items.add(itemName);
+    }
+
+    /**
      * Gets the destination room for a given direction (with handling for bad inputs).
      *
      * @param direction direction in which the user wishes to navigate.
@@ -73,7 +118,7 @@ public class Room {
      * @throws NullPointerException thrown if the method is given a null direction.
      * @throws IllegalArgumentException thrown if the method is given an invalid direction.
      */
-    public String getRoomForDirection(String direction) throws NullPointerException, IllegalArgumentException {
+    public String getRoomFromDirection(String direction) throws NullPointerException, IllegalArgumentException {
         if (direction == null) {
             throw new NullPointerException();
         }

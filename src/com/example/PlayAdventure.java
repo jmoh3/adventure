@@ -1,83 +1,106 @@
 package com.example;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import java.util.Scanner;
 
 /**
  * Allows user to play Adventure.
- *
+ * Another change!
  */
 public class PlayAdventure {
 
-    // URL to default Layout JSON to use
-    private static String defaultSiebelUrl = "https://courses.engr.illinois.edu/cs126/adventure/siebel.json";
     private static Layout layout;
+    private static GameEngine gameEngine;
 
-    public static void main(String[] args) {
+    private static final int MIN_NUMBER_OF_WORDS_FOR_COMMA_USAGE = 2;
 
-        try {
-            layout = Layout.getLayoutFromURL(defaultSiebelUrl);
-        } catch (Exception e) {
-            System.out.println("Error reading in default JSON. Honestly if this happens you should just give up.");
+    /**
+     * Sets up Layout and GameEngine objects from url to Layout JSON.
+     *
+     * @param url url to a layout JSON.
+     * @throws MalformedURLException thrown if given a bad URL.
+     * @throws IOException thrown if getLayoutFromURL cannot read URL.
+     */
+    public void setupGameUsingUrl(String url) throws MalformedURLException, IOException {
+        layout = Layout.getLayoutFromURL(url);
+
+        gameEngine = new GameEngine(layout);
+
+        if (gameEngine.validateLayout()) {
+            System.out.println("VALID PATH FROM START TO END EXISTS");
+        } else {
+            System.out.println("VALID PATH FROM START TO END DOES NOT EXIST");
         }
+    }
 
-        System.out.println("Type yes if you want to use the default layout. Otherwise, enter in a valid url to a layout JSON");
-        Scanner sc = new Scanner(System.in);
-        String layoutDecision = sc.nextLine();
+    /**
+     * Sets up Layout and GameEngine objects from url to Layout JSON.
+     *
+     * @param filepath filepath to a layout JSON.
+     */
+    public void setupGameUsingFilepath(String filepath) {
+        String jsonString = Data.getFileContentsAsString(filepath);
+        layout = Layout.getLayoutFromFilepath(filepath);
 
-        if (layoutDecision == null || !layoutDecision.toLowerCase().equals("yes")) {
-            boolean validLayoutObtained = false;
+        gameEngine = new GameEngine(layout);
 
-            while (!validLayoutObtained && !(layoutDecision.toLowerCase().equals("yes"))) {
-                try {
-                    layout = Layout.getLayoutFromURL(layoutDecision);
-                    validLayoutObtained = true;
-                } catch (Exception e) {
-                    System.out.println("You have entered an invalid url or command. Please try again.");
-                    layoutDecision = sc.nextLine();
-                }
-            }
+        if (gameEngine.validateLayout()) {
+            System.out.println("VALID PATH FROM START TO END EXISTS");
+        } else {
+            System.out.println("VALID PATH FROM START TO END DOES NOT EXIST");
         }
+    }
 
-        Room currentRoom = layout.getCurrentRoom();
-        boolean reachedEndingRoom = false;
+    /**
+     * Enables user to play game.
+     */
+    public void playGame() {
+        Room currentRoom = gameEngine.getCurrentRoom();
+        boolean shouldContinue = true;
 
-        while (!reachedEndingRoom) {
-            boolean userInputIsValid = false;
-            boolean shouldQuit = false;
+        while (shouldContinue) {
+            currentRoom = gameEngine.getCurrentRoom();
+            shouldContinue = handleUserDirections(currentRoom);
+            currentRoom = gameEngine.getCurrentRoom();
 
-            while (!userInputIsValid) {
+            if (currentRoom.getName().equals(layout.getEndingRoom())) {
                 System.out.println(currentRoom.getDescription());
-                System.out.println("From here, you may go" + formatDirections(currentRoom));
-
-                String userDirections = sc.nextLine();
-                String[] decipheredInput = decipherUserInput(userDirections);
-
-                if (decipheredInput == null) {
-                    shouldQuit = true;
-                    break;
-                } else if (decipheredInput[0].equals("go")) {
-                    try {
-                        currentRoom = layout.changeRooms(decipheredInput[1]);
-                        userInputIsValid = true;
-                    } catch (Exception e) {
-                        System.out.println("I can't " + userDirections);
-                    }
-                } else {
-                    System.out.println("I don't understand '" + userDirections + "'");
-                }
-            }
-
-            if (shouldQuit == true) {
+                System.out.println("You have reached your final destination");
                 break;
             }
-            if (currentRoom.getName().equals(layout.getEndingRoom())) {
-                reachedEndingRoom = true;
-            }
         }
+    }
 
-        if (reachedEndingRoom) {
-            System.out.println(currentRoom.getDescription());
-            System.out.println("You have reached your final destination");
+    /**
+     * Provides instructions for user and handles their input.
+     *
+     * @param currentRoom Room that the user is currently in.
+     * @return true if user provides valid directions, false if they decide to quit.
+     */
+    public boolean handleUserDirections(Room currentRoom) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(currentRoom.getDescription());
+        System.out.println("From here, you may go" + formatDirections(currentRoom));
+
+        String userDirections = sc.nextLine();
+        String[] decipheredInput = decipherUserDirections(userDirections);
+
+        if (decipheredInput == null) {
+            return false;
+        } else if (decipheredInput[0].equals("go")) {
+            try {
+                gameEngine.changeRooms(decipheredInput[1]);
+                return true;
+            } catch (Exception e) {
+                System.out.println("I can't " + userDirections);
+                return handleUserDirections(currentRoom);
+            }
+        } else {
+            System.out.println("I don't understand '" + userDirections + "'");
+            return handleUserDirections(currentRoom);
         }
     }
 
@@ -87,16 +110,40 @@ public class PlayAdventure {
      * @param room current room.
      * @return a String listing available directions with appropriate punctuation and grammar.
      */
-    private static String formatDirections(Room room) {
+    public static String formatDirections(Room room) {
         String output = "";
         for (int i = 0; i < room.getDirections().length; i++) {
-            if (i > 0 && room.getDirections().length > 2) {
+            if (i > 0 && room.getDirections().length > MIN_NUMBER_OF_WORDS_FOR_COMMA_USAGE) {
                 output = output + ",";
             }
             if (i == room.getDirections().length - 1 && room.getDirections().length > 1) {
-                output = output + " and";
+                output = output + " or";
             }
             output = output + " " + room.getDirections()[i].getDirectionName();
+        }
+        return output;
+    }
+
+    /**
+     * Formats the valid items in a room so that output is clean.
+     *
+     * @param room current room.
+     * @return a String listing items in room with appropriate punctuation and grammar.
+     */
+    public static String formatItems(Room room) {
+        if (room.getItems() == null || room.getItems().size() == 0) {
+            return "";
+        }
+
+        String output = "";
+        for (int i = 0; i < room.getItems().size(); i++) {
+            if (i > 0 && room.getItems().size() > MIN_NUMBER_OF_WORDS_FOR_COMMA_USAGE) {
+                output = output + ",";
+            }
+            if (i == room.getItems().size() - 1 && room.getItems().size() > 1) {
+                output = output + " or";
+            }
+            output = output + " " + room.getItems().get(i);
         }
         return output;
     }
@@ -107,7 +154,7 @@ public class PlayAdventure {
      * @param input what the user prompts the game to do.
      * @return null if the user directs game to quit, otherwise a lowercase array of all words separated by spaces.
      */
-    private static String[] decipherUserInput(String input) {
+    public String[] decipherUserDirections(String input) {
         String userInput = input.toLowerCase();
 
         if (userInput.equals("quit") || userInput.equals("exit")) {
